@@ -1,31 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>TEST</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Hot Finds</title>
+    <!-- Leaflet JS & CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+
+    <!-- d3 JavaScript -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 </head>
 
 <body>
   <div class="container">
-
-    <div class="jumbotron text-center">
-      <h1>Hot Finds On Craigslist</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Find the reason!</a></p>
-    </div>
-
-    <!-- Craigslist Listings -->
-    <div class="row" id="data">
-      <div class="col-md-12">
-        <h4 class="heading">{{collection.year}} {{collection.cause_name}}</h4>
-        <small>{{collection.year}}</small>
+    ​
+        <div class="jumbotron text-center">
+          <h1>Hot Finds On Craigslist</h1>
+          <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Find the reason!</a></p>
+        </div>
+    ​
+        <!-- Craigslist Listings -->
+        <div class="row" id="data">
+          <div class="col-md-12">
+            <h4 class="heading">{{collection.year}} {{collection.cause_name}}</h4>
+            <small>{{collection.year}}</small>
+          </div>
+        </div>
+    ​
       </div>
-    </div>
+    <div id="map"></div>
 
-  </div>
+    <!-- API key -->
+    <script type="text/javascript" src="static/js/config.js"></script>
+
+    <!-- JS -->
+    <!-- <script type="text/javascript" src="static/js/logic.js"></script> -->
+    <!-- <script type="text/javascript" src="static/js/heatmap.js"></script> -->
+
+    <!-- Leaflet heatmap plugin-->
+    <script type="text/javascript" src="static/js/heatmap.js"></script>
+
+
+  </body> 
+
+  
+   
 </body>
 
 </html>
