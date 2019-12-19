@@ -22,7 +22,7 @@ def index():
     collection = mongo.db.mortality_records.find_one()
     return render_template("index.html", collection=collection)
 
-@app.route('/causes/', methods=['GET'])
+@app.route('/causes', methods=['GET'])
 def causes():
   deaths = mongo.db.mortality_records
   output = []
