@@ -2,37 +2,39 @@
 from flask import Flask, render_template
 from flask_table import Table, Col
 from flask_pymongo import PyMongo
-import data-extraction-api
+from flask import jsonify
+from flask import request
 
-# create instance of Flask app
+import dns
+
 app = Flask(__name__)
 
 # Use flask_pymongo to set up mongo connection
-app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_app"
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/craigslist_app"
+app.config["MONGO_URI"] = "mongodb+srv://Harmeet:harmeet123@cluster0-v6uxh.mongodb.net/complete_death_coord_data"
 mongo = PyMongo(app)
 
+# Or set inline
+# mongo = PyMongo(app, uri="mongodb://localhost:27017/craigslist_app")
 
 @app.route("/")
 def index():
+    collection = mongo.db.mortality_records.find_one()
+    return render_template("index.html", collection=collection)
 
-    mars = mongo.db.mars_data.find_one()
+@app.route('/causes/', methods=['GET'])
+def causes():
+  deaths = mongo.db.mortality_records
+  output = []
+#   myquery = { "year": "2017" }
 
-    if (mars):
-        return render_template("index.html", mars_data=mars)
-    else:
-        mars = mongo.db.mars_data
-        mars_data = scrape_mars.scrape()
-        mars.update({}, mars_data, upsert=True)
-        return render_template("index.html", mars_data=mars_data)
+#   for s in deaths.find(myquery):
+  for s in deaths.find():
+    output.append({'year' : s['year'],'cause_name' : s['cause_name'],'state' : s['state'],'deaths' : s['deaths'],'aadr' : s['aadr'], 'Latitude' : s['Latitude'], 'Longitude' : s['Longitude']})
+  return jsonify({'result' : output})
 
 
-@app.route("/scrape")
-def scraper():
-    mars = mongo.db.mars_data
-    mars_data = scrape_mars.scrape()
-    mars.update({}, mars_data, upsert=True)
-
-    return render_template("index.html", mars_data=mars_data)
+# return render_template("index.html", collection=collection)
 
 
 if __name__ == "__main__":
