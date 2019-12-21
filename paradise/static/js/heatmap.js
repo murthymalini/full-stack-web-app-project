@@ -12,24 +12,21 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 var url = "/causes";
 
-d3.json(url, function(response) {
+d3.json(url, function (response) {
+  var fatality = response.result;
 
-  console.log(response);
+  console.log(fatality);
 
   var heatArray = [];
 
-  for (var i = 0; i < response.length; i++) {
-    var latitude = response[i].latitude;
-    var longitude = response[i].longitude;
-
-    if (latitude) {
-      heatArray.push([latitude, longitude]);
-    }
+  for (var i = 0; i < fatality.length; i++) {
+    var latitude = fatality[i].Latitude;
+    var longitude = fatality[i].Longitude;
+    console.log(latitude);
   }
-
-  // var heat = L.heatLayer(heatArray, {
-  //   radius: 20,
-  //   blur: 35
-  // }).addTo(myMap);
-
 });
+
+  //   if (latitude) {
+  //     heatArray.push([latitude, longitude]);
+  //   }
+  // }
