@@ -1,0 +1,1 @@
+FLASK_APP=paradise/app.py flask run
