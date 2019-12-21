@@ -3,16 +3,16 @@
   background: #eee8ee;
 } */
 
-/* html,
+html,
 body,
 #map {
   height: 100%;
-} */
+} 
 
-#map {
+/* #map {
   height: 600;
   height: 800;
-}
+} */
 
 body {
   padding: 0;

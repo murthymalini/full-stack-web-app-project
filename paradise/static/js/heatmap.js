@@ -28,8 +28,8 @@ d3.json(url, function(response) {
   }
 
   // var heat = L.heatLayer(heatArray, {
-    // radius: 20,
-    // blur: 35
+  //   radius: 20,
+  //   blur: 35
   // }).addTo(myMap);
 
 });
