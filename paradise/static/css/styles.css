@@ -3,10 +3,15 @@
   background: #eee8ee;
 } */
 
-html,
+/* html,
 body,
 #map {
   height: 100%;
+} */
+
+#map {
+  height: 600;
+  height: 800;
 }
 
 body {

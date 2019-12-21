@@ -1,13 +1,16 @@
 # import necessary libraries
 from flask import Flask, render_template
-from flask_table import Table, Col
+# from flask_table import Table, Col
 from flask_pymongo import PyMongo
 from flask import jsonify
 from flask import request
-
+import json
 import dns
+import os
 
 app = Flask(__name__)
+
+mapkey = os.environ.get('MAPKEY', '')
 
 # Use flask_pymongo to set up mongo connection
 # app.config["MONGO_URI"] = "mongodb://localhost:27017/craigslist_app"
@@ -19,8 +22,16 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
+    output = []
     collection = mongo.db.mortality_records.find_one()
+    causes = mongo.db.mortality_records.distinct("cause_name")
+
     return render_template("index.html", collection=collection)
+
+@app.route("/usmap")
+def usmap():
+    collection = mongo.db.mortality_records.find_one()
+    return render_template("index_map.html", collection=collection)
 
 @app.route('/causes', methods=['GET'])
 def causes():
@@ -34,7 +45,12 @@ def causes():
   return jsonify({'result' : output})
 
 
-# return render_template("index.html", collection=collection)
+# create route that gives us our map key
+@app.route("/mapkey")
+def mapkeyroute():
+    global mapkey
+    config = { "apikey": mapkey }
+    return jsonify(config)
 
 
 if __name__ == "__main__":
