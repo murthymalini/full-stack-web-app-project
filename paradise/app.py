@@ -22,9 +22,9 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    output = []
     collection = mongo.db.mortality_records.find_one()
-    causes = mongo.db.mortality_records.distinct("cause_name")
+    # output = []
+    # causes = mongo.db.mortality_records.distinct("cause_name")
 
     return render_template("index.html", collection=collection)
 
