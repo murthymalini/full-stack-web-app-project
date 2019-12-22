@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mortality Statistics</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h1 style="color:blue"
+        class="title-text">Mortality Death Rate in US</h1>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12  col-md-12">
+        <div id="scatter">
+          <!-- We append our chart here. -->
+        </div>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12  col-md-12">
+        <div class="article">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+
+</html>
