@@ -20,13 +20,32 @@ d3.json(url, function (response) {
   var longitude = 0;
   var aadr = 0;
   var marker = [];
+  var state = "";
+
+  var markers = L.markerClusterGroup();
 
   for (var i = 0; i < fatality.length; i++) {
     latitude = fatality[i].Latitude;
     longitude = fatality[i].Longitude;
-    aadr =   fatality[i].aadr;
+    state = fatality[i].state;
+    deaths =   fatality[i].deaths;
+    aadr = fatality[i].aadr;
+    theYear = fatality[i].year;
 
-    marker = L.marker([latitude, longitude]).addTo(myMap); 
+    // marker = L.marker([latitude, longitude]).addTo(myMap); 
+    console.log(latitude,longitude,aadr,state)
+    markers.addLayer(L.marker([latitude, longitude])
+      .bindPopup("<h1>" +state+"</h1><hr><p>Total Deaths in " + theYear + ": "+deaths+"</p><p>Deaths per 100,000 in population: "+aadr+"</p>"));
+
+
+
+  }
+
+  // Add our marker cluster layer to the map
+  myMap.addLayer(markers);
+});
+
+
     
   //   if (latitude) {
   //     heatArray.push([latitude, longitude]);
@@ -37,6 +56,4 @@ d3.json(url, function (response) {
   //   blur: 35
   // }).addTo(myMap);
 
-  }
 
-});
