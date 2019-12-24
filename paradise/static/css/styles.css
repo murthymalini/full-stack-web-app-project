@@ -4,16 +4,18 @@
 } */
 
 html,
-body,
-#map {
-      height: 100%;
-    width: 1000px 
+body {
+    height: 100%;
+    width: 100% 
 
 }
 
-/* #map {
-  height: 500;
-} */
+#map { 
+  height: 100%;
+  width: 1000px;
+  padding: 0px;
+  margin: 40px;
+} 
 
 /* body {
   padding: 0;
