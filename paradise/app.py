@@ -23,10 +23,19 @@ mongo = PyMongo(app)
 @app.route("/")
 def index():
     collection = mongo.db.mortality_records.find_one()
-    # output = []
-    # causes = mongo.db.mortality_records.distinct("cause_name")
-
     return render_template("index.html", collection=collection)
+    
+
+@app.route("/test")
+def test():
+
+    # output = []
+    # for s in mongo.db.mortality_records.distinct("cause_name"):
+      # output.append(s['cause_name'])
+
+    # return render_template("index.html", collection=collection,causes=output)
+    return render_template("index.html")
+
 
 @app.route("/usmap")
 def usmap():
@@ -37,10 +46,11 @@ def usmap():
 def causes():
   deaths = mongo.db.mortality_records
   output = []
-#   myquery = { "year": "2017" }
+  myquery = { "year": "2017" ,"cause_name": "All causes"}
 
-#   for s in deaths.find(myquery):
-  for s in deaths.find():
+  for s in deaths.find(myquery):
+
+  # for s in deaths.find():
     output.append({'year' : s['year'],'cause_name' : s['cause_name'],'state' : s['state'],'deaths' : s['deaths'],'aadr' : s['aadr'], 'Latitude' : s['Latitude'], 'Longitude' : s['Longitude']})
   return jsonify({'result' : output})
 
