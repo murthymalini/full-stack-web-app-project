@@ -10,7 +10,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   accessToken: API_KEY
 }).addTo(myMap);
 
-var url = "/causes";
+var url = "/data";
 d3.json(url, function (response) {
   var fatality = response.result;
   console.log(fatality)
@@ -44,16 +44,4 @@ d3.json(url, function (response) {
   // Add our marker cluster layer to the map
   myMap.addLayer(markers);
 });
-
-
-    
-  //   if (latitude) {
-  //     heatArray.push([latitude, longitude]);
-  //   }
-
-  // var heat = L.heatLayer(heatArray, {
-  //   radius: aadr*0.10,
-  //   blur: 35
-  // }).addTo(myMap);
-
 

@@ -11,12 +11,16 @@ body {
 }
 
 #map { 
-  height: 100%;
-  width: 1000px;
-  padding: 0px;
-  margin: 40px;
+  height: 80%;
+  width: 80%px;
+  margin: 50px; 
 } 
 
+.jumbotron
+{ 
+  color: rgb(146, 194, 146);
+  background-color: beige;
+}
 /* body {
   padding: 0;
   margin: 0;

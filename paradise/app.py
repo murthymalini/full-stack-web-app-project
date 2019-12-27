@@ -1,9 +1,9 @@
 # import necessary libraries
-from flask import Flask, render_template
 # from flask_table import Table, Col
-from flask_pymongo import PyMongo
+from flask import Flask, render_template
 from flask import jsonify
 from flask import request
+from flask_pymongo import PyMongo
 import json
 import dns
 import os
@@ -22,38 +22,43 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    collection = mongo.db.mortality_records.find_one()
-    return render_template("index.html", collection=collection)
-    
-
-@app.route("/test")
-def test():
-
-    # output = []
-    # for s in mongo.db.mortality_records.distinct("cause_name"):
-      # output.append(s['cause_name'])
-
-    # return render_template("index.html", collection=collection,causes=output)
+    # collection = mongo.db.mortality_records.find_one()
+    # return render_template("index.html", collection=collection)
     return render_template("index.html")
+    
+@app.route('/data', methods=['GET'])
+def getData():
+  deaths = mongo.db.mortality_records
+  output = []
+  myquery = {"year": "2017"  ,"cause_name": "All causes"}
 
+  for s in deaths.find(myquery):
+    output.append({'year' : s['year'],'cause_name' : s['cause_name'],'state' : s['state'],'deaths' : s['deaths'],'aadr' : s['aadr'], 'Latitude' : s['Latitude'], 'Longitude' : s['Longitude']})
+  return jsonify({'result' : output})
+
+@app.route("/causes", methods=['GET'])
+def getCauses():
+  deaths = mongo.db.mortality_records
+  output = []
+
+  for s in deaths.distinct("cause_name"):
+    output.append({'cause_name' : s})
+  return jsonify({'result' : output})
+
+@app.route("/years", methods=['GET'])
+def getYears():
+
+  deaths = mongo.db.mortality_records
+  output = []
+
+  for s in deaths.distinct("year"):
+    output.append({'year' : s})
+  return jsonify({'result' : output})
 
 @app.route("/usmap")
 def usmap():
     collection = mongo.db.mortality_records.find_one()
     return render_template("index_map.html", collection=collection)
-
-@app.route('/causes', methods=['GET'])
-def causes():
-  deaths = mongo.db.mortality_records
-  output = []
-  myquery = { "year": "2017" ,"cause_name": "All causes"}
-
-  for s in deaths.find(myquery):
-
-  # for s in deaths.find():
-    output.append({'year' : s['year'],'cause_name' : s['cause_name'],'state' : s['state'],'deaths' : s['deaths'],'aadr' : s['aadr'], 'Latitude' : s['Latitude'], 'Longitude' : s['Longitude']})
-  return jsonify({'result' : output})
-
 
 # create route that gives us our map key
 @app.route("/mapkey")
