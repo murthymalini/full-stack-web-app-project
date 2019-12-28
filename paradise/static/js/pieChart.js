@@ -1,15 +1,32 @@
   
-function buildPieCharts() {
+function buildPieCharts(year) {
   
-    var URL = '/data';
-  
-    d3.json(URL).then((sampleData) => {
+    var URL = '/total_deaths/' + year;
+    console.log("Build Pie Chart Data:");
+    console.log(year);
+    d3.json(URL, function (response) {
+        console.log("Pie chart json output, URL, response");
+        console.log(URL);
+        sampleData = response;
+        console.log(sampleData);
+        myCauses = [];
+        myDeaths = [];
+
+        for (var i = 0; i < sampleData.length; i++) {
+            if (sampleData[i].causes != "All causes") {
+                myCauses.push(sampleData[i].causes);
+                myDeaths.push(sampleData[i].deaths);
+            }
+        }
+        console.log(myCauses);
+        console.log(myDeaths);
+        
   
       // BUILD PIE CHART
       var dataPie = [{
-        "labels": sampleData["otu_ids"].slice(0,10),
-        "values": sampleData["sample_values"].slice(0,10),
-        "hovertext": sampleData["otu_labels"].slice(0,10),
+        "labels": myCauses.slice(0,10),
+        "values": myDeaths.slice(0,10),
+        "hovertext": myCauses.slice(0,10),
         "type": "pie"
       }];
   
@@ -22,28 +39,7 @@ function buildPieCharts() {
       
       Plotly.newPlot("pie", dataPie, layoutPie);
   
-      // BUILD BUBBLE CHART
-      var traceBubble = {
-        x: sampleData["otu_ids"],
-        y: sampleData["sample_values"],
-        text: sampleData["otu_labels"],
-        mode: 'markers',
-        marker: {
-          size: sampleData["sample_values"],
-          color: sampleData["otu_ids"]
-        }
-      };
-    
-      var layoutBubble = {
-          xaxis: {
-            title: {
-              text: "OTU_IDS"
-            }}
-      };
       
-      var dataBubble = [traceBubble];
-     
-      Plotly.newPlot('bubble', dataBubble,layoutBubble);
     
     });
     
