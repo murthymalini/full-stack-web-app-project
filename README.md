@@ -18,31 +18,31 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 
 ### Workflow 
 
-* Step 1 : Extract Data 
+Step 1 : Extract Data 
 
--
--
-
-* Step 2 : Data wrangling and Databasing
-
--
--
--
-
-* Step 3 : Render Data 
-
-- HMTL & CSS files
- - index.html : Used to set up the webpage where data will be rendered that create vizualisations
- - style.css : Used to style the webpage
- 
-- Javascript Files 
- - logic.js : Primary javascript files that sets up map and connects functions
- - heatmap.js :
- - config.js :
- - 
  -
+ -
+
+Step 2 : Data wrangling and Databasing
+
+ -
+ -
+ -
+
+Step 3 : Render Data 
+
+ - HMTL & CSS files
+   - index.html : Used to set up the webpage where data will be rendered that create vizualisations
+   - style.css : Used to style the webpage
  
- Javascript packages used:
+ - Javascript Files 
+   - logic.js : Primary javascript files that sets up map and connects functions
+   - heatmap.js :
+   - config.js :
+   - 
+   -
+ 
+ ### Javascript packages used:
  
  * Mapbox
  * Leaflet
