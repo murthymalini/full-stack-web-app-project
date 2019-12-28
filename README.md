@@ -51,6 +51,9 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
  * ???
  * ???
  
+ ### Vizualization Examples 
+ 
+ 
  ## Steps to run the application
  
  1. 
