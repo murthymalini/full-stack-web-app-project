@@ -2,34 +2,34 @@
 # Interactive Web Dashboard (add the heroku link here, if we deploy)
 
 
-### Summary
+## Summary
 
 This is an internactive Web Dashboard of US death rates and death causes (per 100,000 in population) for every state in the United States for 8 years (2010-2017) based on data from the Center for Disease Control (CDC)
 
-### Group Members
+## Group Members
 * Mary Brown
 * Malini Murthy
 * Harmeet Kaur
 * Emi Babu 
 
-### Sources 
+## Sources 
 
 * Harmeet to update the website with the link for data and state latitude and longitude that was scraped 
 
-### Workflow 
+## Workflow 
 
-Step 1 : Extract Data 
-
- -
- -
-
-Step 2 : Data wrangling and Databasing
+### Step 1 : Extract Data 
 
  -
  -
+
+### Step 2 : Data wrangling and Databasing
+
+ -
+ -
  -
 
-Step 3 : Render Data 
+### Step 3 : Render Data 
 
  - HMTL & CSS files
    - index.html : Used to set up the webpage where data will be rendered that create vizualisations
@@ -51,7 +51,7 @@ Step 3 : Render Data
  * ???
  * ???
  
- ### Steps to run the application
+ ## Steps to run the application
  
  1. 
 
