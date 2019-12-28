@@ -4,7 +4,7 @@
 
 ### Summary
 
-This is an internactive Web Dashboard of US death rates and death causes (per 100,000 in population) for every state in the United States for the past 8 years based on data from the Center for Disease Control (CDC)
+This is an internactive Web Dashboard of US death rates and death causes (per 100,000 in population) for every state in the United States for 8 years (2010-2017) based on data from the Center for Disease Control (CDC)
 
 ### Group Members
 * Mary Brown
