@@ -38,11 +38,11 @@
         <div class="jumbotron" >
           <div class="text-center"></div>
             <h1>Top 10 Causes of Death</h1>
-            <p>A Dashboard Analysis of Leading Causes of death in the United States, based on ALL resident
+            <p>A Dashboard Analysis of Leading Causes of Death in the United States, based on ALL resident
               death certificates filed in each of the 50 US states and the District of Columbia. The dashboard
               presents data covering an 8 year period (2010-2017), a subset of data collected by 
               the Center for Disease Control and the  National Center for Health Statistics 
-              <a href="https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu/data">(CDC/NCHS)</a> </p>
+              <a title="Link to CDC Death Rate Data" href="https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu/data">(CDC/NCHS)</a> </p>
             <div class="row">
               <div class="col-md-2">
                 <h5>SELECT Year:</h5>
@@ -58,15 +58,15 @@
           </div>
 
         <div class="row">
-          <div class="col-md-6">
-            <p>Pie Chart Goes Here </p>
+          <div class="col-md-12">
+            <h4>Pie Chart Goes Here </h4>
             <div id="pie"></div>
             <br>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <p>Bar ChartJs Goes Here </p>
+            <h4>Bar ChartJs Goes Here </h4>
             <canvas id="barChart" width="600" height="400"></canvas>
             <br>
           </div>
@@ -74,7 +74,7 @@
         
         <div class="row">
           <div class="col-md-6">
-            <p>Donut ChartJs Goes Here </p>
+            <h4>Donut ChartJs Goes Here </h4>
             <canvas id="donutChart" width="600" height="400"></canvas>
             <br>
           </div>
@@ -82,7 +82,8 @@
         
         <div class="row">
           <div class="col-md-6">
-            <p>Line Graph Goes Here </p>
+            <h4>Line Graph Goes Here </h4>
+            <p>placeholder</p>
             <div id="lineChart"></div>
             <br>
           </div>
@@ -91,12 +92,15 @@
 
       </div>  <!-- end of container -->
       <hr>
-      <p>Regular Map preserve</p>
+      <p>Basic Map</p>
       <div id="map"></div>
       <!-- add code for choropleth leaflet map with colored regions -->
       <hr>
       <p>Color Map testing</p>
-      <div id="mapTest"></div>
+      <div id="mapChoropleth"></div>
+      <hr>
+      <p>Layered Map</p>
+      <div id="mapLayers"></div>
 
   <!-- D3 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
@@ -108,10 +112,10 @@
   <script type="text/javascript" src="static/js/globalVariables.js"></script>   
   <script type="text/javascript" src="static/js/us-states.js"></script>   
   <script type="text/javascript" src="static/js/pieChart.js"></script>    
-  <script type="text/javascript" src="static/js/newChart.js"></script>   
+  <script type="text/javascript" src="static/js/newChart.js"></script> 
+  <script type="text/javascript" src="static/js/mapBasic.js"></script>   
+  <script type="text/javascript" src="static/js/mapColors.js"></script>    
   <script type="text/javascript" src="static/js/mapLayers.js"></script>   
-  <!-- <script type="text/javascript" src="static/js/test.js"></script>    -->
-  <script type="text/javascript" src="static/js/stateColors.js"></script>   
   <!-- <script type="text/javascript" src="static/js/heatmap.js"></script>    -->
   <script type="text/javascript" src="static/js/dashboard.js"></script>   
 

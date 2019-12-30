@@ -10,11 +10,12 @@ body {
 
 }
 
-#map, #mapTest { 
+#map, #mapChoropleth, #mapLayers { 
   height: 80%;
   width: 80%px;
   margin: 50px; 
 } 
+
 
 .jumbotron
 { 
@@ -28,7 +29,7 @@ body {
 
 .info {
   padding: 6px 8px;
-  font: 14px/16px Arial, Helvetica, sans-serif;
+  font: 10px/12px Arial, Helvetica, sans-serif;
   background: white;
   background: rgba(255,255,255,0.8);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
@@ -38,3 +39,19 @@ body {
   margin: 0 0 5px;
   color: #777;
 }
+
+
+.legend {
+  background-color: “black”;
+  line-height: 14px;
+  color: #555;
+  width: auto;
+}
+.legend i {
+  width: 14px;
+  height: 14px;
+  float: left;
+  margin-right: 0px;
+  opacity: 0.7;
+}
+
