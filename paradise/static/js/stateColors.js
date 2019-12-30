@@ -1,94 +1,150 @@
-var url = "/data";
-var markers = L.markerClusterGroup();
+// stateColors.js -  choropleth map 
 
-d3.json(url, function (response) {
-    var fatality = response.result;
-    console.log("My heatmap data today is:");
-    console.log(response);
+// '#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a']
+var info = L.control();
 
-    var heatArray = [];
-    var latitude = 0;
-    var longitude = 0;
-    var aadr = 0;
-    // var marker = [];
-    var state = "";
+info.onAdd = function (myTestMap) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+    this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+        '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+        : 'Hover over a state');
+};
+
+function getColor(d) {
+    return d > 1000 ? '#800026' :
+           d > 500  ? '#BD0026' :
+           d > 200  ? '#E31A1C' :
+           d > 100  ? '#FC4E2A' :
+           d > 50   ? '#FD8D3C' :
+           d > 20   ? '#FEB24C' :
+           d > 10   ? '#FED976' :
+                      '#FFEDA0';
+}
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.density),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+function getNewColor(d) {
+    return d <= 100    ? '#a6cee3' :
+           d >= 1000   ? '#1f78b4' :
+           d >= 10000  ? '#b2df8a' :
+           d >= 25000  ? '#33a02c' :
+           d >= 50000  ? '#fb9a99' :
+           d >= 100000 ? '#e31a1c' :
+           d >= 200000 ? '#fdbf6f' :
+           '#ff7f00';
+}
+
+function highlightFeature(e) { // mouseover event listener
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+    info.update(layer.feature.properties);
+}
+
+function resetHighlight(e) { //mouseout event handler
+    geojson.resetStyle(e.target);
+    info.update();
+}
+
+function zoomToFeature(e) { //click event handler
+    map.fitBounds(e.target.getBounds());
+}
+
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+    });
+}
+
+function buildColorMap() {
+
+    var myTestMap = L.map('mapTest').setView([37.0902, -95.7129], 4);
+
+    L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+        attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>",
+        maxZoom: 18,
+        id: "mapbox.streets",
+        accessToken: API_KEY
+    }).addTo(myTestMap);
+
+    L.marker([37.0902, -95.7129]).addTo(myTestMap)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
+  
+
+    // L.geoJson(statesData).addTo(myTestMap);
+    // L.geoJson(statesData,{
+    //     style: function(feature) {
+    //         return {color: feature.properties.color};
+    //     }
+    // }).bindPopup(function (layer) {
+    //     return layer.feature.properties.description;
+    // }).addTo(myTestMap);
+
+    // geojson = L.geoJson(statesData, {
+    //     style: style,
+    //     onEachFeature: onEachFeature
+    // }).addTo(myTestMap);
+    
+    // L.geoJson(statesData, {style: style}).addTo(myTestMap);
+
+    geojson = L.geoJson(statesData, {
+        style: style,
+        onEachFeature: onEachFeature
+    }).bindPopup(function (layer) {
+            return layer.feature.properties.description;
+    }).addTo(myTestMap);
 
 
 
-    for (var i = 0; i < fatality.length; i++) {
-        latitude = fatality[i].Latitude;
-        longitude = fatality[i].Longitude;
-        state = fatality[i].state;
-        deaths = fatality[i].deaths;
-        aadr = fatality[i].aadr;
-        theYear = fatality[i].year;
+    info.addTo(myTestMap);
 
-        // marker = L.marker([latitude, longitude]).addTo(myMap); 
-        // console.log(latitude, longitude, aadr, state)
-        markers.addLayer(L.marker([latitude, longitude])
-            .bindPopup("<h1>" + state + "</h1><hr><p>Total Deaths in " + theYear + ": " + deaths + "</p><p>Deaths per 100,000 in population: " + aadr + "</p>"));
+    var legend = L.control({position: 'bottomright'});
 
+    legend.onAdd = function (myTestMap) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 100, 1000, 10000, 25000, 50000, 100000, 200000],
+
+        // grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
-    // Add our marker cluster layer to the map
-    myMap.addLayer(markers);
-});
-
-// Add all the cityMarkers to a new layer group.
-// Now we can handle them as one group instead of referencing each individually
-var causes = L.layerGroup(markers);
-
-// Create overlay object to hold our overlay layer
-var overlayMaps = {
-    "All Causes (2017)": causes
+    return div;
 };
 
+legend.addTo(myTestMap);
 
-// Define base layer maps
-var satmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 18,
-    id: "mapbox.satellite",
-    accessToken: API_KEY
-});
-var lightmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 18,
-    id: "mapbox.light",
-    accessToken: API_KEY
-});
-var outmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 18,
-    id: "mapbox.outdoors",
-    accessToken: API_KEY
-});
-
-var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>",
-    maxZoom: 18,
-    id: "mapbox.streets",
-    accessToken: API_KEY
-});
-
-// Define a baseMaps object to hold our base layers
-var baseMaps = {
-    "Satellite Map": satmap,
-    "Street Map": streetmap,
-    "Grayscale Map": lightmap,
-    "Outdoors Map": outmap
-};
-
-
-
-var myMap = L.map("map", {
-    center: [37.0902, -95.7129],
-    zoom: 4,
-    layers: [satmap, lightmap, outmap, streetmap, causes]
-});
-// Create a layer control
-// Pass in our baseMaps and overlayMaps
-// Add the layer control to the map
-L.control.layers(baseMaps, overlayMaps, {
-collapsed: false
-}).addTo(myMap);
+}

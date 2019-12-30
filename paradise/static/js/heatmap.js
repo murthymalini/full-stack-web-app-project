@@ -93,5 +93,4 @@ L.control.layers(baseMaps, overlayMaps, {
 collapsed: false
 }).addTo(myMap);
 
-// build pie chart
-buildPieCharts(2017);
+

@@ -1,5 +1,5 @@
-var currentCause = "All causes";        
-var currentYear = "2017";
+// var currentCause = "All causes";        
+// var currentYear = "2017";
 
 function init() {
   // Grab a reference to the dropdown select element
@@ -36,10 +36,12 @@ function init() {
     });      
   }); 
 
-  // buildMap(currentCause,currentYear);
-  
-
-  // buildPieCharts(initialCause,initialYear);
+  buildPieCharts(currentYear);
+  buildBarChart(currentYear);
+  buildDonutChart(currentYear);
+  buildColorMap();
+  buildMap(currentCause,currentYear);
+  // buildLineChart();
   
 }
   
@@ -47,17 +49,18 @@ function optionChangeCause(newCause) {
     // Fetch new data each time a new cause is selected
     console.log("New cause selected:" + newCause);
     currentCause = newCause;
-    // buildMap(currentCause,currentYear);
-    // buildPie(newCause,currentYear);
-    // buildLineGraph(newCause,currentYear); -- may not need this use independepn Emi/Harmeet graph
+    buildMap(currentCause,currentYear);
+    // buildLineChart();
 }
 function optionChangeYear(newYear) {
     // Fetch new data each time a new year is selected
     console.log("New year selected:" + newYear);
     currentYear = newYear;
-    // buildMap(currentCause,currentYear);
-    // buildPieChart(currentCause,newYear);
-    // buildLineGraph(currentCause,newYear); -- may not need this use independepn Emi/Harmeet graph
+    buildPieCharts(currentYear);
+    buildBarChart(currentYear);
+    buildDonutChart(currentYear);
+    buildMap(currentCause,currentYear);
+    // buildLineChart();
 }  
 
 // Initialize the dashboard

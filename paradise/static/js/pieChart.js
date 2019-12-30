@@ -26,15 +26,15 @@ function buildPieCharts(year) {
       var dataPie = [{
         "labels": myCauses.slice(0,10),
         "values": myDeaths.slice(0,10),
-        "hovertext": myCauses.slice(0,10),
+        "hovertext": year,
         "type": "pie"
       }];
   
       var layoutPie = {
         autosize: true,
-        width: 400,
-        height: 400,
-        margin: { l: 0, r: 0, t:0, b:0}
+        width: 600,
+        height: 200,
+        margin: { l: 0, r: 30, t:0, b:0}
       };
       
       Plotly.newPlot("pie", dataPie, layoutPie);
