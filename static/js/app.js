@@ -139,19 +139,22 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 var url = "/total_deaths";
 d3.json(url).then(function(response) {
 
-    var deathArray = [];
-    var yearArray = [];
+    const distinct = (value, index, self) => {
+        return self.indexOf(value) === index;
+    }
+    var causeArray = [];
+    var responseArray =[];
   
     for (var i = 0; i < response.length; i++) {
-      var deaths_array = response[i].deaths;
-      var year_array = response[i].year;
-      if (response[i].causes=="All causes") {
-        deathArray.push([deaths_array]);
-        yearArray.push([year_array]);
-      }
+        var response_array = response[i];
+        responseArray.push(response_array);
+      if (causeArray.indexOf(response[i]) == -1 && response[i].causes !== "All causes") {
+        var cause_array = response[i].causes;
+        causeArray.push(cause_array);
     }
-    console.log(deathArray);
-    console.log(yearArray);
+    }
+    var unique_causeArray = causeArray.filter(distinct);
+    console.log(responseArray);
 
     // xLinearScale function above csv import
     var xLinearScale = xScale(response, chosenXAxis);
@@ -159,30 +162,81 @@ d3.json(url).then(function(response) {
     // yLinearScale function above csv import
     var yLinearScale = yScale(response, chosenYAxis);
 
+   // Reformat the data: we need an array of arrays of {x, y} tuples
+    var dataReady = unique_causeArray.map( function(grpName) { // .map allows to do something for each element of the list
+        return {
+          name: grpName,
+          values: responseArray.map(function(d) {
+            return {time: d.year, value: d.deaths};
+          })
+        };
+      });
+      // I strongly advise to have a look to dataReady with
+      console.log(dataReady)
+
+    // A color scale: one color for each group
+    var myColor = d3.scaleOrdinal()
+      .domain(unique_causeArray)
+      .range(d3.schemeSet2);
+
     // Create initial axis functions
     var bottomAxis = d3.axisBottom(xLinearScale);
     var leftAxis = d3.axisLeft(yLinearScale);
 
     // append x axis
-    var xAxis = chartGroup.append("g")
+    var xAxis = d3.scaleLinear()
+    chartGroup.append("g")
         .classed("x-axis", true)
         .attr("transform", `translate(0, ${height})`)
         .call(bottomAxis);
 
     // append y axis
-    var yAxis = chartGroup.append("g")
+    var yAxis = d3.scaleLinear()
+    chartGroup.append("g")
         .call(leftAxis);
+      
+    
+    var line = d3.line()
+        .x(function(d) { return xAxis(+d.time) })
+        .y(function(d) { return yAxis(+d.value) })
+        // .x(function(d) { return xLinearScale(d[chosenXAxis]) })
+        // .y(function(d) { return yLinearScale(d[chosenYAxis]) })
+        chartGroup.selectAll("myLines")
+        .data(dataReady)
+        .enter()
+        .append("path")
+          .attr("d", function(d){ return line(d.values) } )
+          .attr("stroke", function(d){ return myColor(d.name) })
+          .style("stroke-width", 4)
+          .style("fill", "none")
 
-    // append initial circles
+    //append initial circles
+    // var circlesGroup = chartGroup.selectAll("myDots")
+    //     .data(dataReady)
+    //     .enter()
+    //     .append("g")
+    //     // .attr("cx", d => xLinearScale(d[chosenXAxis]))
+    //     // .attr("cy", d => yLinearScale(d[chosenYAxis]))
+    //     .style("fill", function(d){ return myColor(d.name) })
+    //     .selectAll("myPoints")
+    //     .data(function(d){ return d.values })
+    //     .enter()
+    //     .append("circle")
+    //     .attr("cx", function(d) { return xAxis(d.time) } )
+    //     .attr("cy", function(d) { return yAxis(d.value) } )
+    //     .attr("r", 3)
+    //     .attr("stroke", "white")
+        //.attr("opacity", "5");
+
     var circlesGroup = chartGroup.selectAll("circle")
         .data(response)
         .enter()
         .append("circle")
         .attr("cx", d => xLinearScale(d[chosenXAxis]))
         .attr("cy", d => yLinearScale(d[chosenYAxis]))
-        .attr("r", 2.5)
-        .attr("fill", "green")
-        .attr("opacity", ".5");
+        .attr("r", 3)
+        .style("fill", function(d){ return myColor(d.causes) })
+        .attr("opacity", "5");
 
     // Create group for  2 x- axis labels
     var xLabelsGroup = chartGroup.append("g")
