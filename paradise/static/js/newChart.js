@@ -2,7 +2,7 @@ function buildBarChart(year) {
     var ctx = document.getElementById('barChart').getContext('2d');
 
     var URL = '/total_deaths/' + year;
-    d3.json(URL, function (response) {
+    d3.json(URL).then(function (response) {
         sampleData = response;
         myCauses = [];
         myDeaths = [];
@@ -68,7 +68,7 @@ function buildDonutChart(year) {
     var ctx = document.getElementById('donutChart').getContext('2d');
 
     var URL = '/total_deaths/' + year;
-    d3.json(URL, function (response) {
+    d3.json(URL).then(function (response) {
         sampleData = response;
         myCauses = [];
         myDeaths = [];

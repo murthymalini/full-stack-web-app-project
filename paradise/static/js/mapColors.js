@@ -93,9 +93,9 @@ function buildColorMap() {
         accessToken: API_KEY
     }).addTo(myColorMap);
 
-    L.marker([37.0902, -95.7129]).addTo(myColorMap)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
+    // L.marker([37.0902, -95.7129]).addTo(myColorMap)
+    //     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    //     .openPopup();
   
 
     // L.geoJson(statesData).addTo(myTestMap);

@@ -4,7 +4,7 @@ function buildPieCharts(year) {
     var URL = '/total_deaths/' + year;
     console.log("Build Pie Chart Data:");
     console.log(year);
-    d3.json(URL, function (response) {
+    d3.json(URL).then(function (response) {
         console.log("Pie chart json output, URL, response");
         console.log(URL);
         sampleData = response;
@@ -32,9 +32,9 @@ function buildPieCharts(year) {
   
       var layoutPie = {
         autosize: true,
-        width: 600,
+        width: 500,
         height: 200,
-        margin: { l: 0, r: 30, t:0, b:0}
+        margin: { l: 0, r: 15, t:0, b:0}
       };
       
       Plotly.newPlot("pie", dataPie, layoutPie);

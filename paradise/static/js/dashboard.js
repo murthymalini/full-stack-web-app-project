@@ -41,6 +41,7 @@ function init() {
   buildDonutChart(currentYear);
   buildBasicMap(currentCause,currentYear);
   buildColorMap();
+  buildTestCharts();
   buildLayeredMap(currentCause,currentYear);
   // buildLineChart();
   

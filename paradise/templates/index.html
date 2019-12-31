@@ -4,45 +4,55 @@
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LiveBetter or Else</title>
+    <title>Live Better or Die Not Trying</title>
 
 
+    <!-- jquery, popper, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+ 
     <!-- Leaflet JS & CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
     crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
     integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script>
+    crossorigin=""></script>	
+
+    <!-- plotly -->
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 
     <!-- d3 JS -->
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
     <!-- Marker Cluster JS & CSS -->
     <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
 
-    <!-- Our CSS -->
-    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+    <!-- local CSS -->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/d3Style.css">
 
 
   </head>
-  <body>
-
     <body>
       <div class="container">
-
         <div class="jumbotron" >
-          <div class="text-center"></div>
             <h1>Top 10 Causes of Death</h1>
             <p>A Dashboard Analysis of Leading Causes of Death in the United States, based on ALL resident
               death certificates filed in each of the 50 US states and the District of Columbia. The dashboard
               presents data covering an 8 year period (2010-2017), a subset of data collected by 
               the Center for Disease Control and the  National Center for Health Statistics 
-              <a title="Link to CDC Death Rate Data" href="https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu/data">(CDC/NCHS)</a> </p>
+              <a title="Link to CDC Death Rate Data" href="https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu/data">(CDC/NCHS)</a> 
+            </p>
             <div class="row">
               <div class="col-md-2">
                 <h5>SELECT Year:</h5>
@@ -53,71 +63,88 @@
                   <select id="selCauseDataset" onchange="optionChangeCause(this.value)"></select>
                 </div>
             </div>
-            <!-- <p><a class="btn btn-primary btn-lg" href="/causes" role="button">Find the reason!</a></p> -->
-    
-          </div>
+        </div> <!-- end of jumbotron -->
 
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-xs-6 col-md-6">
             <h4>Pie Chart Goes Here </h4>
             <div id="pie"></div>
-            <br>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <h4>Bar ChartJs Goes Here </h4>
-            <canvas id="barChart" width="600" height="400"></canvas>
-            <br>
-          </div>
-        </div>      
-        
-        <div class="row">
-          <div class="col-md-6">
+            <!-- We append our pie chart here. -->
+          </div>          
+          <div class="col-xs-6 col-md-6">
             <h4>Donut ChartJs Goes Here </h4>
             <canvas id="donutChart" width="600" height="400"></canvas>
-            <br>
-          </div>
-        </div>        
-        
-        <div class="row">
-          <div class="col-md-6">
-            <h4>Line Graph Goes Here </h4>
-            <p>placeholder</p>
-            <div id="lineChart"></div>
-            <br>
+            <!-- We append our donut chart here. -->
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-xs-6 col-md-6">
+            <h4>Bar ChartJs Goes Here </h4>
+            <canvas id="barChart" width="600" height="400"></canvas>
+            <!-- We append our bar chart here. -->
+          </div>
+          <div class="col-xs-6 col-md-6">
+            <!-- <p>Basic Map</p> -->
+            <div id="map"></div>
+            <!-- add code for basic leaflet map -->
+          </div> 
+        </div>    
+
+        <div class="row">
+          <div class="col-xs-6 col-md-6">
+            <!-- <p>Choroplet Leaflet Map testing</p> -->
+            <div id="mapChoropleth"></div>
+            <!-- add code for choropleth leaflet map with colored regions -->
+          </div>  
+          <div class="col-xs-6 col-md-6">
+            <!-- <p>Choroplet Plotly Map testing</p> -->
+            <div id="mapChoroPlot"></div>
+            <!-- add code for choropleth Plotly map with colored regions -->
+          </div>  
+        </div>  
+
+        <div class="row">
+          <div class="col-xs-6 col-md-6">
+            <!-- <p>Layered Map</p> -->
+            <div id="mapLayers"></div>
+            <!-- add code for layers and cluster leaflet map  -->
+          </div>  
+        </div>  
+
+
+        
+        <div class="row">
+          <div class="col-xs-6 col-md-6">
+            <h4>Line Graph Goes Here </h4>
+            <p>placeholder</p>
+            <div id="scatter"></div>
+            <!-- We append our scatter chart here. -->
+          </div>  
+        </div>  
 
       </div>  <!-- end of container -->
-      <hr>
-      <p>Basic Map</p>
-      <div id="map"></div>
-      <!-- add code for choropleth leaflet map with colored regions -->
-      <hr>
-      <p>Color Map testing</p>
-      <div id="mapChoropleth"></div>
-      <hr>
-      <p>Layered Map</p>
-      <div id="mapLayers"></div>
 
-  <!-- D3 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
 
+
+  <!-- D3, plotly and chartJS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
   <!-- Our JavaScript -->
   <script type="text/javascript" src="static/js/config.js"></script>
-  <script type="text/javascript" src="static/js/globalVariables.js"></script>   
-  <script type="text/javascript" src="static/js/us-states.js"></script>   
+  <script type="text/javascript" src="static/js/globalVariables.js"></script>  
+  <script type="text/javascript" src="static/js/us-states.js"></script>    
+  <script type="text/javascript" src="static/js/app.js"></script>   
   <script type="text/javascript" src="static/js/pieChart.js"></script>    
   <script type="text/javascript" src="static/js/newChart.js"></script> 
-  <script type="text/javascript" src="static/js/mapBasic.js"></script>   
+  <script type="text/javascript" src="static/js/mapBasic.js"></script>    
+  <script type="text/javascript" src="static/js/mapChoropleth.js"></script>   
   <script type="text/javascript" src="static/js/mapColors.js"></script>    
   <script type="text/javascript" src="static/js/mapLayers.js"></script>   
-  <!-- <script type="text/javascript" src="static/js/heatmap.js"></script>    -->
   <script type="text/javascript" src="static/js/dashboard.js"></script>   
 
   </body>
 </html>
+  

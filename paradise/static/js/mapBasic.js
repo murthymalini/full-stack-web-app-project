@@ -15,10 +15,11 @@ function buildBasicMap(cause,year) {
 
 
 
-    var url = "/data/" + year + "/" + cause.substr(0,3);
+    var URL = "/data/" + year + "/" + cause.substr(0,3);
     console.log("Build the basic map using this URL: " + url);
 
-    d3.json(url, function (response) {
+
+    d3.json(URL).then(function (response) {
         var fatality = response.result;
         console.log("Build the map RESPONSE, using this URL: " + url);
         console.log(response);
