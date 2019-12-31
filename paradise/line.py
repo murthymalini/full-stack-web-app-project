@@ -65,6 +65,7 @@ def total_deaths():
                {'cause': "$cause_name", 
                'years_name': "$year"},
               'total_ui': { '$sum': "$deaths" },
+              'total_aadr' :{'$sum':"$aadr"},
               'count_ui': { '$sum': 1 }
           }
       }
@@ -72,17 +73,20 @@ def total_deaths():
   )
          
   total_deaths=[]
+  total_aadr=[]
   causes=[]
   years=[]
   complete_data=[]
   for i in grouped_data:
         data={}
         total_deaths.append(i['total_ui'])
+        total_aadr.append(i['total_aadr'])
         causes.append(i['_id']['cause'])
         years.append(i['_id']['years_name'])
         data["deaths"]=i['total_ui']
         data["causes"]=i['_id']['cause']
         data["year"]=i['_id']['years_name']
+        data["aadr"]=i['total_aadr']
         complete_data.append(data)
   #Sort data based off year       
   final_data=sorted(complete_data, key = lambda i: i['year'])     
