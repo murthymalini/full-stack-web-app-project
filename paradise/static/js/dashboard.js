@@ -38,9 +38,9 @@ function init() {
   buildDonutChart(currentYear);
 
   buildColorMap();
-  buildBasicMap(currentCause,currentYear);
-  buildTestCharts(currentCause,currentYear);
-  buildLayeredMap(currentCause,currentYear);
+  // buildBasicMap(currentCause,currentYear);
+  // buildTestCharts(currentCause,currentYear);
+  // buildLayeredMap(currentCause,currentYear);
   buildLineChart();
   
 }
@@ -48,9 +48,9 @@ function init() {
 function optionChangeCause(newCause) {
     // Fetch new data each time a new cause is selected
     currentCause = newCause;
-    buildBasicMap(currentCause,currentYear);
-    buildLayeredMap(currentCause,currentYear);
-    buildLineChart();
+    // buildBasicMap(currentCause,currentYear);
+    // buildLayeredMap(currentCause,currentYear);
+    // buildLineChart();
 }
 function optionChangeYear(newYear) {
     // Fetch new data each time a new year is selected
@@ -58,8 +58,8 @@ function optionChangeYear(newYear) {
     buildPieCharts(currentYear);
     buildBarChart(currentYear);
     buildDonutChart(currentYear);
-    buildBasicMap(currentCause,currentYear);
-    buildLayeredMap(currentCause,currentYear);
+    // buildBasicMap(currentCause,currentYear);
+    // buildLayeredMap(currentCause,currentYear);
     buildLineChart();
 }  
 
