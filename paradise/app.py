@@ -40,13 +40,15 @@ def getData():
 def getSearchData(year,cause_str):
   deaths = mongo.db.mortality_records
   output = []
+  final_data = []
 
   myquery = {"year": int(year),"cause_name": {"$regex": cause_str, "$options" : "i"}}
 
   for s in deaths.find(myquery):
     output.append({'year' : s['year'],'cause_name' : s['cause_name'],'state' : s['state'],'deaths' : s['deaths'],'aadr' : s['aadr'], 'Latitude' : s['Latitude'], 'Longitude' : s['Longitude']})
   
-  return jsonify({'result' : output})
+  final_data=sorted(output, key = lambda i: i['state'])   
+  return jsonify({'result' : final_data})
 ############################################################
 
 ##########Route that returns distinct causes for drop down menu ##################    

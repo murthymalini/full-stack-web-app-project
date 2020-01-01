@@ -5,8 +5,6 @@ function init() {
   // Grab a reference to the dropdown select element
   var selectorCause = d3.select("#selCauseDataset");
   var selectorYear = d3.select("#selYearDataset");
-  console.log("Default cause: " + currentCause);
-  console.log("Default year: " + currentYear);
 
   // Use the list of distinct causes to populate the select options
   var url = "/causes";
@@ -20,7 +18,6 @@ function init() {
         .enter;
     });  
   });
-  console.log("Hello World " + currentCause);
   d3.select("#selCauseDataset").select("option").property("value",currentCause)
     .text(currentCause);
 
@@ -41,7 +38,7 @@ function init() {
   buildDonutChart(currentYear);
   buildBasicMap(currentCause,currentYear);
   buildColorMap();
-  buildTestCharts();
+  buildTestCharts(currentCause,currentYear);
   buildLayeredMap(currentCause,currentYear);
   // buildLineChart();
   
@@ -49,7 +46,6 @@ function init() {
   
 function optionChangeCause(newCause) {
     // Fetch new data each time a new cause is selected
-    console.log("New cause selected:" + newCause);
     currentCause = newCause;
     buildBasicMap(currentCause,currentYear);
     buildLayeredMap(currentCause,currentYear);
@@ -57,7 +53,6 @@ function optionChangeCause(newCause) {
 }
 function optionChangeYear(newYear) {
     // Fetch new data each time a new year is selected
-    console.log("New year selected:" + newYear);
     currentYear = newYear;
     buildPieCharts(currentYear);
     buildBarChart(currentYear);

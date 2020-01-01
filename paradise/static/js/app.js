@@ -118,7 +118,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
         var yLabel = "Number of Deaths";
     }
 
-    var toolTip = d3.tip()
+    var toolTip = d3-tip()
         .attr("class", "tooltip")
         .offset([80, -60])
         .html(function (d) {
