@@ -34,13 +34,13 @@ function init() {
     });      
   }); 
 
-  buildPieCharts(currentYear);
-  buildBarChart(currentYear);
   buildDonutChart(currentYear);
+  buildColorMap(currentCause,currentYear);
 
-  buildColorMap();
   // buildBasicMap(currentCause,currentYear);
-  buildTestCharts(currentCause,currentYear);
+  // buildPieCharts(currentYear);
+  // buildBarChart(currentYear);
+  // buildTestCharts(currentCause,currentYear);
   // buildLayeredMap(currentCause,currentYear);
   // buildLineChart();
   
@@ -49,6 +49,9 @@ function init() {
 function optionChangeCause(newCause) {
     // Fetch new data each time a new cause is selected
     currentCause = newCause;
+
+    buildColorMap(currentCause,currentYear);
+
     // buildBasicMap(currentCause,currentYear);
     // buildLayeredMap(currentCause,currentYear);
     // buildLineChart();
@@ -56,9 +59,12 @@ function optionChangeCause(newCause) {
 function optionChangeYear(newYear) {
     // Fetch new data each time a new year is selected
     currentYear = newYear;
-    buildPieCharts(currentYear);
-    buildBarChart(currentYear);
+
     buildDonutChart(currentYear);
+    buildColorMap(currentCause,currentYear);
+
+    // buildPieCharts(currentYear);
+    // buildBarChart(currentYear);
     // buildBasicMap(currentCause,currentYear);
     // buildLayeredMap(currentCause,currentYear);
     // buildLineChart();

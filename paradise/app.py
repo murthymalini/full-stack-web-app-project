@@ -216,7 +216,7 @@ def total_YRdeath(year):
         data["year"]=i['_id']['years_name']
         complete_data.append(data)
   #Sort data based off year       
-  final_data=sorted(complete_data, key = lambda i: i['causes'])     
+  final_data=sorted(complete_data, key = lambda i: i['deaths'], reverse=True)     
   return jsonify(final_data) 
   
 ##############Route to send data for line plot################
