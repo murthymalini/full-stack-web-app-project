@@ -17,7 +17,7 @@ mongo = PyMongo(app)
 def index():
   """Return the homepage."""
   collection = mongo.db.mortality_records.find_one()
-  return render_template("index.html", collection=collection)
+  return render_template("index-line.html", collection=collection)
 
 ##########Route that returns complete data##################
 @app.route('/cause', methods=['GET'])
