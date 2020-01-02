@@ -2,13 +2,8 @@
 function buildPieCharts(year) {
   
     var URL = '/total_deaths/' + year;
-    console.log("Build Pie Chart Data:");
-    console.log(year);
     d3.json(URL).then(function (response) {
-        console.log("Pie chart json output, URL, response");
-        console.log(URL);
         sampleData = response;
-        console.log(sampleData);
         myCauses = [];
         myDeaths = [];
 
@@ -18,8 +13,6 @@ function buildPieCharts(year) {
                 myDeaths.push(sampleData[i].deaths);
             }
         }
-        console.log(myCauses);
-        console.log(myDeaths);
         
   
       // BUILD PIE CHART
@@ -42,9 +35,6 @@ function buildPieCharts(year) {
       };
       
       Plotly.newPlot("pie", dataPie, layoutPie);
-  
-      
-    
     });
     
 } // end function buildPieCharts

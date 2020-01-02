@@ -41,7 +41,7 @@ function init() {
   // buildBasicMap(currentCause,currentYear);
   // buildTestCharts(currentCause,currentYear);
   // buildLayeredMap(currentCause,currentYear);
-  buildLineChart();
+  // buildLineChart();
   
 }
   
@@ -60,7 +60,7 @@ function optionChangeYear(newYear) {
     buildDonutChart(currentYear);
     // buildBasicMap(currentCause,currentYear);
     // buildLayeredMap(currentCause,currentYear);
-    buildLineChart();
+    // buildLineChart();
 }  
 
 // Initialize the dashboard

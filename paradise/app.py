@@ -37,7 +37,7 @@ def getData():
 
 ##########Route that returns data for specific year and specific cause ##################    
 @app.route('/data/<year>/<cause_str>', methods=['GET'])
-def getSearchData(year,cause_str):
+def getSearchYearCauseData(year,cause_str):
   deaths = mongo.db.mortality_records
   output = []
   final_data = []
@@ -176,16 +176,15 @@ def total_deaths():
   return jsonify(final_data)  
 ###############################################################
 
+##############Route to send data for line plot################
+@app.route('/data/<cause_str>', methods=['GET'])
+def getSearchCauseData(cause_str):  
+  myquery = {"cause_name": {"$regex": cause_str, "$options" : "i"}}
 
-##############Route to send data for pie chart################
-@app.route("/total_deaths/<year>", methods=['GET'])
-def total_YRdeath(year):
-  query = year
   grouped_data=mongo.db.mortality_records.aggregate(
-    [
-      
-      { '$match': {"year": int(query)}},
-
+    [      
+      { '$match': myquery
+      },
       {
         '$group':
            {
@@ -217,9 +216,12 @@ def total_YRdeath(year):
         data["year"]=i['_id']['years_name']
         complete_data.append(data)
   #Sort data based off year       
-  final_data=sorted(complete_data, key = lambda i: i['causes'])     
-  return jsonify(final_data) 
+  final_data=sorted(complete_data, key = lambda i: i['year'])     
+  return jsonify(final_data)  
+###############################################################
 
+
+############################################################
 
 # coll.aggregate([{$group:{_id:"$cause_name",min_deaths: {$min: "$deaths"},max_deaths: {$max: "$deaths"}}}])
 

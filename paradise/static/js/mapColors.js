@@ -84,8 +84,8 @@ function onEachFeature(feature, layer) {
 
 function buildColorMap() {
 
-    var myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
-    console.log("Build the color map");
+    var myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 3.5);
+
     L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
         attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>",
         maxZoom: 18,
