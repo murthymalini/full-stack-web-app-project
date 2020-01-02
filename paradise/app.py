@@ -176,6 +176,49 @@ def total_deaths():
   return jsonify(final_data)  
 ###############################################################
 
+##############Route to send data for pie chart################
+@app.route("/total_deaths/<year>", methods=['GET'])
+def total_YRdeath(year):
+  query = year
+  grouped_data=mongo.db.mortality_records.aggregate(
+    [
+      
+      { '$match': {"year": int(query)}},
+
+      {
+        '$group':
+           {
+               '_id':
+               {'cause': "$cause_name", 
+               'years_name': "$year"},
+              'total_deaths': { '$sum': "$deaths" },
+              'total_aadr': { '$sum': "$aadr" },
+              'count_rows': { '$sum': 1 }
+          }
+      }
+    ]
+  )
+         
+  total_deaths=[]
+  total_aadr=[]
+  causes=[]
+  years=[]
+  complete_data=[]
+  for i in grouped_data:
+        data={}
+        total_deaths.append(i['total_deaths'])
+        total_aadr.append(i['total_aadr'])
+        causes.append(i['_id']['cause'])
+        years.append(i['_id']['years_name'])
+        data["deaths"]=i['total_deaths']
+        data["aadr"]=i['total_aadr']
+        data["causes"]=i['_id']['cause']
+        data["year"]=i['_id']['years_name']
+        complete_data.append(data)
+  #Sort data based off year       
+  final_data=sorted(complete_data, key = lambda i: i['causes'])     
+  return jsonify(final_data) 
+  
 ##############Route to send data for line plot################
 @app.route('/data/<cause_str>', methods=['GET'])
 def getSearchCauseData(cause_str):  

@@ -8,8 +8,8 @@ function init() {
 
   // Use the list of distinct causes to populate the select options
   var url = "/causes";
-  d3.json(url, function (data) {
-    var causeList = data.result;
+  d3.json(url).then(function (response) {
+    var causeList = response.result;
     causeList.forEach((cause) => {
       selectorCause
         .append("option")
@@ -18,12 +18,13 @@ function init() {
         .enter;
     });  
   });
+
   d3.select("#selCauseDataset").select("option").property("value",currentCause)
     .text(currentCause);
 
   // Use the list of distinct years  to populate the select options
-  var url = "/years";
-  d3.json(url, function (response) {
+  var url = "/years";  
+  d3.json(url).then(function (response) {
     var yearList = response.result;
     yearList.forEach((year) => {
       selectorYear
@@ -39,7 +40,7 @@ function init() {
 
   buildColorMap();
   // buildBasicMap(currentCause,currentYear);
-  // buildTestCharts(currentCause,currentYear);
+  buildTestCharts(currentCause,currentYear);
   // buildLayeredMap(currentCause,currentYear);
   // buildLineChart();
   

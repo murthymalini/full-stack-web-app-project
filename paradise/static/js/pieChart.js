@@ -2,6 +2,7 @@
 function buildPieCharts(year) {
   
     var URL = '/total_deaths/' + year;
+    
     d3.json(URL).then(function (response) {
         sampleData = response;
         myCauses = [];
