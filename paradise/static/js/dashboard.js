@@ -36,13 +36,6 @@ function init() {
 
   buildDonutChart(currentYear);
   buildColorMap(currentCause,currentYear);
-
-  // buildBasicMap(currentCause,currentYear);
-  // buildPieCharts(currentYear);
-  // buildBarChart(currentYear);
-  // buildTestCharts(currentCause,currentYear);
-  // buildLayeredMap(currentCause,currentYear);
-  // buildLineChart();
   
 }
   
@@ -52,9 +45,6 @@ function optionChangeCause(newCause) {
 
     buildColorMap(currentCause,currentYear);
 
-    // buildBasicMap(currentCause,currentYear);
-    // buildLayeredMap(currentCause,currentYear);
-    // buildLineChart();
 }
 function optionChangeYear(newYear) {
     // Fetch new data each time a new year is selected
@@ -62,12 +52,6 @@ function optionChangeYear(newYear) {
 
     buildDonutChart(currentYear);
     buildColorMap(currentCause,currentYear);
-
-    // buildPieCharts(currentYear);
-    // buildBarChart(currentYear);
-    // buildBasicMap(currentCause,currentYear);
-    // buildLayeredMap(currentCause,currentYear);
-    // buildLineChart();
 }  
 
 // Initialize the dashboard

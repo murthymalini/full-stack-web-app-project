@@ -4,7 +4,7 @@
 var info = L.control();
 var geojson;
 var myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
-;
+
 
 info.onAdd = function () {
 // info.onAdd = function (myColorMap) {
@@ -17,7 +17,7 @@ info.onAdd = function () {
 info.update = function (props) {
 
     this._div.innerHTML = '<h5>' + currentYear + ' Death Rates<br>' + currentCause + '</h5>' + (props ?
-        '<b>' + props.name + '</b><br />' + props.density + ' total deaths'
+        '<b>' + props.name + '</b><br>' + props.density + ' total deaths'
         : 'Hover over a state');
 };
 
@@ -115,7 +115,8 @@ function buildColorMap(cause,year) {
     setDeathRate(cause,year);
 
     myColorMap.remove();
-    myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
+    // myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
+    myColorMap = L.map('mapChoropleth').setView([37.8, -96], 4);
 
     L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
         attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>",
@@ -152,6 +153,7 @@ function buildColorMap(cause,year) {
         return div;
     }
     legend.addTo(myColorMap);
+
 }
 
 
