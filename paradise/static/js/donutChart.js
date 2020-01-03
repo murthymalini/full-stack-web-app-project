@@ -5,11 +5,6 @@ function resetDonutCanvas(){
 
 function buildDonutChart(year,summary) {
     var ctx = document.getElementById('donutChart').getContext('2d');
-    var chartTitle = year + " Death Rate";
-    
-    if (summary == 'aadr') {
-        chartTitle = year + " Age Adjusted Death Rate (per 100,000 in population)";
-    }
 
     var URL = '/total_deaths/' + year;
     d3.json(URL).then(function (response) {

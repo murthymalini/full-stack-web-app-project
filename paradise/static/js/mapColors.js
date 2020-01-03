@@ -16,8 +16,8 @@ info.onAdd = function () {
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
 
-    this._div.innerHTML = '<h5>' + currentYear + ' Death Rates<br>' + currentCause + '</h5>' + (props ?
-        '<b>' + props.name + '</b><br>' + props.density + ' total deaths'
+    this._div.innerHTML = '<p><b>' + chartTitle + '</b><br>' + currentCause + '</p>' + (props ?
+        '<b>' + props.name + '</b><br>' + props.density + currentUnits
         : 'Hover over a state');
 };
 
@@ -112,7 +112,7 @@ function onEachFeature(feature, layer) {
 
 function buildColorMap(cause,year) {
     // update geojson with deathRate based on currentYear and currentCause
-    setDeathRate(cause,year);
+    // setDeathRate(cause,year);
 
     myColorMap.remove();
     // myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
@@ -125,7 +125,7 @@ function buildColorMap(cause,year) {
         accessToken: API_KEY
     }).addTo(myColorMap);
 
-    geojson = L.geoJson(statesData, {
+    geojson = L.geoJson(getDeathRate(), {
         style: style,
         onEachFeature: onEachFeature
     }).bindPopup(function (layer) {
@@ -155,6 +155,4 @@ function buildColorMap(cause,year) {
     legend.addTo(myColorMap);
 
 }
-
-
 
