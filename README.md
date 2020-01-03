@@ -1,13 +1,8 @@
-#H1 __PARADISE__
-
+# Paradise, an interactive Web Dashboard for top 10 leading death causes in United States 
+<a href="https://github.com/Harmeet2504/full-stack-web-app-project/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Harmeet2504/full-stack-web-app-project?color=yellow"></a>
 <a href="https://github.com/Harmeet2504/full-stack-web-app-project/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Harmeet2504/full-stack-web-app-project?color=yellow"></a>
 <a href="https://github.com/Harmeet2504/full-stack-web-app-project/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Harmeet2504/full-stack-web-app-project"></a>
-# United States - Top 10 Leading Death Causes 
-# Interactive Web Dashboard (add the heroku link here, if we deploy)
-
-## Summary
-
-This is an internactive Web Dashboard of US death rates and death causes (per 100,000 in population) for every state in the United States for 8 years (2010-2017) based on data from the Center for Disease Control (CDC), supplemented with data for state coordinates and state codes.
+<a href="https://github.com/Harmeet2504/full-stack-web-app-project"><img alt="GitHub license" src="https://img.shields.io/github/license/Harmeet2504/full-stack-web-app-project?color=red"></a>
 
 ## Group Members
 * Mary Brown
@@ -15,18 +10,23 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 * Harmeet Kaur
 * Emi Babu 
 
+d (add the heroku link here, if we deploy)
+
+## Summary
+
+This is an internactive Web Dashboard of US death rates and death causes (per 100,000 in population) for every state in the United States for 8 years (2010-2017) based on data from the Center for Disease Control (CDC), supplemented with data for state coordinates and state codes.
+
+
 ## Objectives
 •What is the leading cause of death in the USA?
-
 •How have death trends been due to each cause from 2010-2017?
-
 •Identify high-risk states based on mortality statistics across 50 states of USA and the District of Columbia
 
 ## Sources 
 
-* 1. Center for Disease Control and Prevention ("https://data.cdc.gov/resource/"): This dataset presents the age-adjusted death rates for the 10 leading causes of death in the United States beginning in 1999.Total number of records are 10,886. Data are based on information from all resident death certificates filed in the 50 states and the District of Columbia using demographic and medical characteristics. Age-adjusted death rates (per 100,000 population) are based on the 2000 U.S. standard population. 
-* 2. "https://www.latlong.net/category/states-236-14.html": This dataset includes information on coordinates for all 50 states.
-* 3. "https://worldpopulationreview.com/states/state-abbreviations/": This dataset includes state codes.
+* Center for Disease Control and Prevention ("https://data.cdc.gov/resource/"): This dataset presents the age-adjusted death rates for the 10 leading causes of death in the United States beginning in 1999.Total number of records are 10,886. Data are based on information from all resident death certificates filed in the 50 states and the District of Columbia using demographic and medical characteristics. Age-adjusted death rates (per 100,000 population) are based on the 2000 U.S. standard population. 
+* "https://www.latlong.net/category/states-236-14.html": This dataset includes information on coordinates for all 50 states.
+* "https://worldpopulationreview.com/states/state-abbreviations/": This dataset includes state codes.
 
 
 ## Workflow 
