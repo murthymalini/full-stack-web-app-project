@@ -2,8 +2,11 @@
 
 // '#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a']
 var info = L.control();
+var geojson;
+var myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
 
-info.onAdd = function (myColorMap) {
+info.onAdd = function () {
+// info.onAdd = function (myColorMap) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
     this.update();
     return this._div;
@@ -17,7 +20,7 @@ info.update = function (props) {
         : 'Hover over a state');
 };
 
-function getColor(d) {
+function getColor_bkp(d) {
     return d > 100000 ? '#800026' :
            d > 50000  ? '#BD0026' :
            d > 25000  ? '#E31A1C' :
@@ -28,32 +31,7 @@ function getColor(d) {
                       '#FFEDA0';
 }
 
-// function getoldColor(d) {
-//     var thisState = d.name;
-//     var deaths = d.density;
-
-//     var URL = "/data/" + currentYear + "/" + currentCause.substr(0,3);
-
-//     d3.json(URL).then(function (response) {
-//         var fatality = response.result;
-//         for (var i = 0; i < fatality.length; i++) {
-//             if (fatality[i].state == thisState) {
-//                 deaths = fatality[i].deaths;
-//             }
-//         }
-
-//     });
-//     return deaths > 100000 ? '#800026' :
-//            deaths > 50000  ? '#BD0026' :
-//            deaths > 25000  ? '#E31A1C' :
-//            deaths > 10000  ? '#FC4E2A' :
-//            deaths > 5000   ? '#FD8D3C' :
-//            deaths > 2000   ? '#FEB24C' :
-//            deaths > 1000   ? '#FED976' :
-//                       '#FFEDA0';
-// }
-
-function style(feature) {
+function style(feature) {    
     return {
         fillColor: getColor(feature.properties.density),
         weight: 2,
@@ -63,27 +41,38 @@ function style(feature) {
         fillOpacity: 0.7
     };
 }
-function getLegendColor(deaths) {
-    return deaths >= 100000 ? '#800026' :
-           deaths >= 50000  ? '#BD0026' :
-           deaths >= 25000  ? '#E31A1C' :
-           deaths >= 10000  ? '#FC4E2A' :
-           deaths >= 5000   ? '#FD8D3C' :
-           deaths >= 2000   ? '#FEB24C' :
-           deaths >= 1000   ? '#FED976' :
+function getLegendColor_bkp(d) { //original code
+    return d >= 100000 ? '#800026' :
+           d >= 50000  ? '#BD0026' :
+           d >= 25000  ? '#E31A1C' :
+           d >= 10000  ? '#FC4E2A' :
+           d >= 5000   ? '#FD8D3C' :
+           d >= 2000   ? '#FEB24C' :
+           d >= 1000   ? '#FED976' :
                       '#FFEDA0';
 }
 
-// function getNewColor(d) {
-//     return d <= 100    ? '#a6cee3' :
-//            d >= 1000   ? '#1f78b4' :
-//            d >= 10000  ? '#b2df8a' :
-//            d >= 25000  ? '#33a02c' :
-//            d >= 50000  ? '#fb9a99' :
-//            d >= 100000 ? '#e31a1c' :
-//            d >= 200000 ? '#fdbf6f' :
-//            '#ff7f00';
-// }
+function getLegendColor(d) { //new code
+    return d < 100    ? '#a6cee3' :
+           d < 1000   ? '#1f78b4' :
+           d < 10000  ? '#b2df8a' :
+           d < 25000  ? '#33a02c' :
+           d < 50000  ? '#fb9a99' :
+           d < 100000 ? '#e31a1c' :
+           d < 200000 ? '#fdbf6f' :
+           '#ff7f00';
+}
+
+function getColor(d) {//new code
+    return d < 100    ? '#a6cee3' :
+           d < 1000   ? '#1f78b4' :
+           d < 10000  ? '#b2df8a' :
+           d < 25000  ? '#33a02c' :
+           d < 50000  ? '#fb9a99' :
+           d < 100000 ? '#e31a1c' :
+           d < 200000 ? '#fdbf6f' :
+           '#ff7f00';
+}
 
 function highlightFeature(e) { // mouseover event listener
     var layer = e.target;
@@ -121,8 +110,9 @@ function onEachFeature(feature, layer) {
 
 
 function buildColorMap(cause,year) {
+    // update geojson with deathRate based on currentYear and currentCause
+    setDeathRate(cause,year);
 
-    var myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
 
     L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
         attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>",
@@ -131,19 +121,12 @@ function buildColorMap(cause,year) {
         accessToken: API_KEY
     }).addTo(myColorMap);
 
-    // update geojson with deathRate based on currentYear and currentCause
-    setDeathRate(cause,year);
-    console.log("update geojon should be done")
-    console.log(statesData);
-
     geojson = L.geoJson(statesData, {
         style: style,
         onEachFeature: onEachFeature
     }).bindPopup(function (layer) {
             return layer.features.properties.density;
     }).addTo(myColorMap);
-
-
 
     info.addTo(myColorMap);
 
@@ -153,7 +136,8 @@ function buildColorMap(cause,year) {
 
         var div = L.DomUtil.create('div', 'info legend'),
 
-        grades = [0, 1000, 2000, 5000, 10000, 25000, 50000, 100000],
+        grades = [0, 100, 1000, 10000, 25000, 50000, 100000,200000],
+        
         labels = [];
 
         // loop through our density intervals and generate a label with a colored square for each interval
