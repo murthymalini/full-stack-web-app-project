@@ -30,8 +30,8 @@ body {
 
 .jumbotron
 { 
-  color: rgb(146, 194, 146);
-  background-color: beige;
+  color: rgb(48, 27, 1);
+  background-color: rgb(241, 247, 203);
 }
 
 
@@ -39,7 +39,7 @@ body {
   padding: 6px 8px;
   font: 10px/12px Arial, Helvetica, sans-serif;
   background: white;
-  background: rgba(255,255,255,0.8);
+  background: rgba(235, 164, 164, 0.8);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
 }
