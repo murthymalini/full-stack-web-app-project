@@ -19,14 +19,16 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 
 ## Objectives
 •What is the leading cause of death in the USA?
+
 •How have death trends been due to each cause from 2010-2017?
+
 •Identify high-risk states based on mortality statistics across 50 states of USA and the District of Columbia
 
 ## Sources 
 
 * Center for Disease Control and Prevention ("https://data.cdc.gov/resource/"): This dataset presents the age-adjusted death rates for the 10 leading causes of death in the United States beginning in 1999.Total number of records are 10,886. Data are based on information from all resident death certificates filed in the 50 states and the District of Columbia using demographic and medical characteristics. Age-adjusted death rates (per 100,000 population) are based on the 2000 U.S. standard population. 
 * "https://www.latlong.net/category/states-236-14.html": This dataset includes information on coordinates for all 50 states.
-* "https://worldpopulationreview.com/states/state-abbreviations/": This dataset includes state codes.
+* "https://worldpopulationreview.com/states/state-abbreviations": This dataset includes state codes.
 
 
 ## Workflow 
