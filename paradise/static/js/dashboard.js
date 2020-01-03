@@ -1,10 +1,9 @@
-// var currentCause = "All causes";        
-// var currentYear = "2017";
 
 function init() {
   // Grab a reference to the dropdown select element
   var selectorCause = d3.select("#selCauseDataset");
   var selectorYear = d3.select("#selYearDataset");
+  var selectorMeasure = d3.select("#selSummary");
 
   // Use the list of distinct causes to populate the select options
   var url = "/causes";
@@ -19,7 +18,7 @@ function init() {
     });  
   });
 
-  d3.select("#selCauseDataset").select("option").property("value",currentCause)
+  selectorCause.select("option").property("value",currentCause)
     .text(currentCause);
 
   // Use the list of distinct years  to populate the select options
@@ -34,27 +33,53 @@ function init() {
     });      
   }); 
 
-  buildDonutChart(currentYear);
-  buildColorMap(currentCause,currentYear);
+  selectorYear.select("option").property("value",currentYear)
+  .text(currentYear);
+
+  selectorMeasure
+    .append("option")
+    .text("Total Deaths")
+    .property("value","deaths")
+    .enter;
+
+  selectorMeasure
+    .append("option")
+    .text("AADR")
+    .property("value","aadr")
+    .enter;
+
+  selectorMeasure.select("option").property("value","deaths")
+    .text("Total Deaths");
+
+    buildDonutChart(currentYear,currentSummary);
+    buildColorMap(currentCause,currentYear,currentSummary);
   
 }
   
 function optionChangeCause(newCause) {
     // Fetch new data each time a new cause is selected
     currentCause = newCause;
-
-    buildColorMap(currentCause,currentYear);
+    buildColorMap(currentCause,currentYear,currentSummary);
 
 }
 function optionChangeYear(newYear) {
     // Fetch new data each time a new year is selected
     currentYear = newYear;
-
-    buildDonutChart(currentYear);
-    buildColorMap(currentCause,currentYear);
+    resetDonutCanvas();
+    buildDonutChart(currentYear,currentSummary);
+    buildColorMap(currentCause,currentYear,currentSummary);
 }  
 
+function optionChangeSummary(newSummary) {
+  // Fetch new data each time a new summary is selected
+  currentSummary = newSummary;
+  resetDonutCanvas();
+  buildDonutChart(currentYear,currentSummary);
+  buildColorMap(currentCause,currentYear,currentSummary);
+}
+
 // Initialize the dashboard
+
 init();
 
 
