@@ -1,4 +1,5 @@
 https://img.shields.io/github/forks/Harmeet2504/full-stack-web-app-project
+<a href="https://github.com/Harmeet2504/full-stack-web-app-project/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Harmeet2504/full-stack-web-app-project"></a>
 # United States - Top 10 Leading Death Causes 
 # Interactive Web Dashboard (add the heroku link here, if we deploy)
 
