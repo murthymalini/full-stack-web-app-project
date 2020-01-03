@@ -33,7 +33,7 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 
 ### Step 1 : Extract Data (Modules: json, requests, pandas)
 
- Datasets were extracted from CDC API endpoints in the json format by applying filtering and paging criteria from  "https://data.cdc.gov/resource/bi63-dtpu.json$where=year>=2010&$limit=4600" to fetch records from 2010 through 2017. Coordinates for all 50 states were scrapped from "https://www.latlong.net/category/states-236-14.html" and state codes were downloaded as csv from "https://worldpopulationreview.com/states/state-abbreviations/" in jupyter notebook.
+ Datasets were extracted from CDC API endpoints in the json format by applying filtering and paging criteria from  "https://data.cdc.gov/resource/bi63-dtpu.json$where=year>=2010&$limit=4600" to fetch records from 2010 through 2017. Coordinates for all 50 states were scrapped from "https://www.latlong.net/category/states-236-14.html" and state codes were downloaded as csv from "https://worldpopulationreview.com/states/state-abbreviations" in jupyter notebook.
 
 
 ### Step 2 : Data wrangling and Databasing (Modules: pandas, pymongo, os, MongoDB Compass)
