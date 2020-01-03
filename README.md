@@ -1,4 +1,4 @@
-# Paradise, an interactive Web Dashboard for top 10 leading death causes in United States 
+# Paradise, an interactive dashboard for top 10 leading death causes in United States 
 <a href="https://github.com/Harmeet2504/full-stack-web-app-project/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Harmeet2504/full-stack-web-app-project?color=yellow"></a>
 <a href="https://github.com/Harmeet2504/full-stack-web-app-project/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Harmeet2504/full-stack-web-app-project?color=yellow"></a>
 <a href="https://github.com/Harmeet2504/full-stack-web-app-project/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Harmeet2504/full-stack-web-app-project"></a>
