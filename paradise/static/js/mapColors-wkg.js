@@ -3,7 +3,7 @@
 // '#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a']
 var info = L.control();
 var geojson;
-var myColorMap;
+var myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
 
 info.onAdd = function () {
 // info.onAdd = function (myColorMap) {
@@ -112,8 +112,6 @@ function onEachFeature(feature, layer) {
 function buildColorMap(cause,year) {
     // update geojson with deathRate based on currentYear and currentCause
     setDeathRate(cause,year);
-
-    myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
 
 
     L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
