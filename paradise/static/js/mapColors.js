@@ -132,7 +132,6 @@ function buildColorMap(cause,year) {
     }).addTo(myColorMap);
 
     info.addTo(myColorMap);
-
     var legend = L.control({position: 'bottomright'});
 
     legend.onAdd = function () {
