@@ -77,6 +77,7 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 ### Challenges
 1. Line plot: Emi add here
 2. Map: Mary add here
+3. Connecting the plots together with the dropdown
 
 
 
