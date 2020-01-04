@@ -94,7 +94,7 @@ function optionChangeSummary(newSummary) {
   resetDonutCanvas();
   buildDonutChart(currentYear, currentSummary);
 
-  setDeathRate(currentCause, currentYear, currentSummary);
+  getDeathRate();
   buildColorMap(currentCause, currentYear, currentSummary);
 }
 

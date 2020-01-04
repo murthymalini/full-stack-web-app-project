@@ -22,19 +22,4 @@ function getDeathRate() {
     
 }
 
-// var URL = "/data/" + year + "/" + cause.substr(0,3);
-// d3.json(URL).then(function (response) {
-//     var fatality = response.result;
-//     console.log("lookup in progress..");
-//     console.log("current density;" + feature.properties.density);
-//     for (var i = 0; i < fatality.length; i++) {
-//         if (fatality[i].state == feature.properties.name) {
-//             feature.properties.density = fatality[i].deaths;
-//             deathTotal = fatality[i].deaths;
-//             console.log("state: " + feature.properties.name);
-//             console.log(" total death:"+ deathTotal );
-//             console.log("updated density: " + feature.properties.density);
-//             break;
-//         }
-//     }
-// });
+

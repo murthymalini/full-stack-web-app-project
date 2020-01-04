@@ -42,38 +42,32 @@ function style(feature) {
         fillOpacity: 0.7
     };
 }
-function getLegendColor_bkp(d) { //original code
-    return d >= 100000 ? '#800026' :
-           d >= 50000  ? '#BD0026' :
-           d >= 25000  ? '#E31A1C' :
-           d >= 10000  ? '#FC4E2A' :
-           d >= 5000   ? '#FD8D3C' :
-           d >= 2000   ? '#FEB24C' :
-           d >= 1000   ? '#FED976' :
-                      '#FFEDA0';
+
+function getLegendColor(d) { 
+    return d < 50    ? '#f7fbff' :
+           d < 250    ? '#deebf7' :
+           d < 500    ? '#c6dbef' :
+           d < 750    ? '#9ecae1' :
+           d < 1000   ? '#6baed6' :
+           d < 10000  ? '#4292c6' :
+           d < 50000  ? '#2171b5' :
+           d < 100000 ? '#08519c' :
+           '#08306b';
 }
 
-function getLegendColor(d) { //new code
-    return d < 100    ? '#a6cee3' :
-           d < 1000   ? '#1f78b4' :
-           d < 10000  ? '#b2df8a' :
-           d < 25000  ? '#33a02c' :
-           d < 50000  ? '#fb9a99' :
-           d < 100000 ? '#e31a1c' :
-           d < 200000 ? '#fdbf6f' :
-           '#ff7f00';
+function getColor(d) {
+    return d < 50    ? '#f7fbff' :
+           d < 250    ? '#deebf7' :
+           d < 500    ? '#c6dbef' :
+           d < 750    ? '#9ecae1' :
+           d < 1000   ? '#6baed6' :
+           d < 10000  ? '#4292c6' :
+           d < 50000  ? '#2171b5' :
+           d < 100000 ? '#08519c' :
+           '#08306b';
+
 }
 
-function getColor(d) {//new code
-    return d < 100    ? '#a6cee3' :
-           d < 1000   ? '#1f78b4' :
-           d < 10000  ? '#b2df8a' :
-           d < 25000  ? '#33a02c' :
-           d < 50000  ? '#fb9a99' :
-           d < 100000 ? '#e31a1c' :
-           d < 200000 ? '#fdbf6f' :
-           '#ff7f00';
-}
 
 function highlightFeature(e) { // mouseover event listener
     var layer = e.target;
@@ -112,7 +106,7 @@ function onEachFeature(feature, layer) {
 
 function buildColorMap(cause,year) {
     // update geojson with deathRate based on currentYear and currentCause
-    // setDeathRate(cause,year);
+    getDeathRate(currentCause,currentYear,currentSummary);
 
     myColorMap.remove();
     // myColorMap = L.map('mapChoropleth').setView([37.0902, -95.7129], 4);
@@ -138,8 +132,7 @@ function buildColorMap(cause,year) {
     legend.onAdd = function () {
 
         var div = L.DomUtil.create('div', 'info legend'),
-
-        grades = [0, 100, 1000, 10000, 25000, 50000, 100000,200000],
+        grades = [0, 50, 250, 500, 750,1000,10000, 50000, 100000],
         
         labels = [];
 
