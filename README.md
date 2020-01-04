@@ -34,6 +34,7 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 
 
 ## Workflow 
+![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/workflow.png)
 
 ### Step 1 : Extract Data (Modules: json, requests, pandas)
 
