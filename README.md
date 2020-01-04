@@ -10,7 +10,7 @@
 * Harmeet Kaur
 * Emi Babu 
 
-d (add the heroku link here, if we deploy)
+ (add the heroku link here, if we deploy)
 
 ## Summary
 
@@ -70,20 +70,19 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
  * D3
  * Chart
  
- 
- ### Vizualization Examples 
- 
- 
  ## Steps to run the application
  
  1. 
 
-### challenges
+### Challenges
+1. Line plot: Emi add here
+2. Map: Mary add here
 
 
 
 ### Conclusions
 conclusions from interpretations here
+
 To run: Include a Mapbox token 
 
 
