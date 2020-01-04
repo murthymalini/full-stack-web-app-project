@@ -72,7 +72,7 @@ state boundaries on the map.
    - mapColors.js : choropleth map
    - scatter.js : creates the scatter plot to show trends across all causes
    - us-states.js : refers to US states with latitude and longitude geo co-ordinates
-   - TO ADD A Config.js
+   - Config.js : To be created and Mapbox access key added
    
  ### Javascript packages used:
  * Mapbox
@@ -81,10 +81,11 @@ state boundaries on the map.
  * Chart.js
  
  
-### Challenges
+### Challenges Faced 
 1. Connecting the scatter plot for each cause using a line to show trends with different units of measurement in one graph.
-2. Map: Getting the properties within choropleth, passing an array within locations and z:co-ordinates
-3. Connecting the plots together with the dropdown
+2. Map: Getting the properties within choropleth, passing an array within locations and z:co-ordinates : Resolved
+3. Connecting the plots together with the dropdown : Resolved
+4. Deployment on Heroku with mLab MongoDB
 
 
 ### Findings of the project
@@ -97,10 +98,10 @@ state boundaries on the map.
 
 To run: 
 
-* Include a Mapbox token within Config.js
-* Ensure all libraries are installed per requirements.txt
-* Run python app.py
-
+1. Run: pip install -r requirements.txt to install necessary modules in environment.
+2. An API key for MapBox is required. These can be obtained at https://docs.mapbox.com/help/glossary/access-token/. After obtaining a key, copy that key into the config.js file.
+3. Run app.py.
+4. Access application at http://localhost:8000/.
 
 
 
