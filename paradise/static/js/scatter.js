@@ -1,11 +1,11 @@
-var svgWidth = 500;
+var svgWidth = 800;
 var svgHeight = 500;
 
 var margin = {
     top: 20,
-    right: 10,
+    right: 40,
     bottom: 80,
-    left: 10
+    left: 100
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -25,7 +25,7 @@ var chartGroup = svg.append("g")
 
 // Initial Params
 var chosenXAxis = "year";
-var chosenYAxis = "deaths";
+var chosenYAxis = "aadr";
 var abbrYOffset = 5;
 var abbrXOffset = -11;
 
@@ -34,7 +34,7 @@ function xScale(censusData, chosenXAxis) {
     // create scales
     var xLinearScale = d3.scaleLinear()
         .domain([d3.min(censusData, d => d[chosenXAxis]) - 1,
-        d3.max(censusData, d => d[chosenXAxis])
+        d3.max(censusData, d => d[chosenXAxis]) + 0.5
         ])
         .range([0, width]);
     return xLinearScale;
@@ -44,13 +44,12 @@ function xScale(censusData, chosenXAxis) {
 function yScale(censusData, chosenYAxis) {
     // create scales
     var yLinearScale = d3.scaleLinear()
-        .domain([20000,
+        .domain([200,
         //d3.min(censusData, d => d[chosenYAxis]) - 13364,
         //d3.max(censusData, d => d[chosenYAxis])
-        700000
+        9000
         ])
         .range([height, 0]);
-    //console.log(d3.min(censusData, d => d[chosenYAxis]))
     return yLinearScale;
 }
 
@@ -110,12 +109,9 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
     if (chosenXAxis === "year") {
         var xLabel = "Year";
     }
-    else {
-        var xLabel = "All Causes";
-    }
 
-    if (chosenYAxis === "deaths") {
-        var yLabel = "Number of Deaths";
+    if (chosenYAxis === "aadr") {
+        var yLabel = "AADR";
     }
 
     var toolTip = d3.tip()
@@ -154,7 +150,7 @@ d3.json(url).then(function(response) {
     }
     }
     var unique_causeArray = causeArray.filter(distinct);
-    console.log(responseArray);
+    // console.log(responseArray);
 
     // xLinearScale function above csv import
     var xLinearScale = xScale(response, chosenXAxis);
@@ -167,12 +163,11 @@ d3.json(url).then(function(response) {
         return {
           name: grpName,
           values: responseArray.map(function(d) {
-            return {time: d.year, value: d.deaths};
+            return {time: d.year, value: d.aadr};
           })
         };
       });
-      // I strongly advise to have a look to dataReady with
-      console.log(dataReady)
+    //   console.log(dataReady)
 
     // A color scale: one color for each group
     var myColor = d3.scaleOrdinal()
@@ -199,8 +194,6 @@ d3.json(url).then(function(response) {
     var line = d3.line()
         .x(function(d) { return xAxis(+d.time) })
         .y(function(d) { return yAxis(+d.value) })
-        // .x(function(d) { return xLinearScale(d[chosenXAxis]) })
-        // .y(function(d) { return yLinearScale(d[chosenYAxis]) })
         chartGroup.selectAll("myLines")
         .data(dataReady)
         .enter()
@@ -210,33 +203,30 @@ d3.json(url).then(function(response) {
           .style("stroke-width", 4)
           .style("fill", "none")
 
-    //append initial circles
-    // var circlesGroup = chartGroup.selectAll("myDots")
-    //     .data(dataReady)
-    //     .enter()
-    //     .append("g")
-    //     // .attr("cx", d => xLinearScale(d[chosenXAxis]))
-    //     // .attr("cy", d => yLinearScale(d[chosenYAxis]))
-    //     .style("fill", function(d){ return myColor(d.name) })
-    //     .selectAll("myPoints")
-    //     .data(function(d){ return d.values })
-    //     .enter()
-    //     .append("circle")
-    //     .attr("cx", function(d) { return xAxis(d.time) } )
-    //     .attr("cy", function(d) { return yAxis(d.value) } )
-    //     .attr("r", 3)
-    //     .attr("stroke", "white")
-        //.attr("opacity", "5");
-
     var circlesGroup = chartGroup.selectAll("circle")
         .data(response)
         .enter()
         .append("circle")
         .attr("cx", d => xLinearScale(d[chosenXAxis]))
         .attr("cy", d => yLinearScale(d[chosenYAxis]))
-        .attr("r", 3)
+        .attr("r", 5)
         .style("fill", function(d){ return myColor(d.causes) })
-        .attr("opacity", "5");
+        .attr("opacity", "6");
+
+    // Add a legend at the end of each line
+    // svg
+    //   .selectAll("myLabels")
+    //   .data(response)
+    //   .enter()
+    //     .append('g')
+    //     .append("text")
+    //       .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; }) // keep only the last value of each time series
+    //       .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.deaths) + ")"; }) // Put the text at the position of the last point
+    //       .attr("x", 12) // shift the text a bit more right
+    //       .text(function(d) { return d.name; })
+    //       .style("fill", function(d){ return myColor(d.name) })
+    //       .style("font-size", 15)
+    
 
     // Create group for  2 x- axis labels
     var xLabelsGroup = chartGroup.append("g")
@@ -249,13 +239,6 @@ d3.json(url).then(function(response) {
         .classed("active", true)
         .text("Year");
 
-    var causeLabel = xLabelsGroup.append("text")
-        .attr("x", 0)
-        .attr("y", 40)
-        .attr("value", "deathArray") // value to grab for event listener
-        .classed("inactive", true)
-        .text("All Causes");
-
     var yLabelsGroup = chartGroup.append("g")
         .attr("transform", "rotate(-90)")
 
@@ -263,10 +246,10 @@ d3.json(url).then(function(response) {
     var deathLabel = yLabelsGroup.append("text")
         .attr("y", 0 - margin.left)
         .attr("x", 0 - (height / 2))
-        .attr("value", "deaths")
+        .attr("value", "aadr")
         .attr("dy", "1em")
         .classed("active", true)
-        .text("Number of Deaths");
+        .text("AADR");
 
     // updateToolTip function above csv import
     var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
@@ -299,21 +282,10 @@ d3.json(url).then(function(response) {
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
                 // changes classes to change bold text
-                if (chosenXAxis === "All Causes") {
-                    causeLabel
-                        .classed("active", true)
-                        .classed("inactive", false);
+                if (chosenXAxis === "year") {
                     yearLabel
                         .classed("active", false)
                         .classed("inactive", true);
-                }
-                else {
-                    causeLabel
-                        .classed("active", false)
-                        .classed("inactive", true);
-                    yearLabel
-                        .classed("active", true)
-                        .classed("inactive", false);
                 }
             }
         });
@@ -346,7 +318,7 @@ d3.json(url).then(function(response) {
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
                 // changes classes to change bold text
-                if (chosenYAxis === "deaths") {
+                if (chosenYAxis === "aadr") {
                     deathLabel
                         .classed("active", true)
                         .classed("inactive", false);
@@ -382,7 +354,7 @@ d3.json(url).then(function(response) {
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
                 // changes classes to change bold text
-                if (chosenYAxis === "deaths") {
+                if (chosenYAxis === "aadr") {
                     deathLabel
                         .classed("active", true)
                         .classed("inactive", false);

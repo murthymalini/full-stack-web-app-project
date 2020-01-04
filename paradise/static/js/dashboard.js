@@ -70,7 +70,15 @@ function optionChangeCause(newCause) {
 function optionChangeYear(newYear) {
   // Fetch new data each time a new year is selected
   currentYear = newYear;
-
+  
+  if (currentSummary == 'aadr') {
+    currentUnits = " aadr";
+    chartTitle = currentYear + " Age Adjusted Death Rate (per 100,000 in population)";
+  }
+  else {
+    currentUnits = " deaths";
+    chartTitle = currentYear + " Total Deaths";
+  }
   resetDonutCanvas();
   buildDonutChart(currentYear, currentSummary);
 
