@@ -50,16 +50,25 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
  
 ### App Routes
 http://localhost:8000/causes
+
 http://localhost:8000/years
+
 http://localhost:8000/data
+
 http://localhost:8000/data/<year>/<cause_str>
+ 
 http://localhost:8000/alldata
+
 http://localhost:8000/year/<year>
+ 
 http://localhost:8000/state
+
 http://localhost:8000/state/<state_abbr>
-http://localhost:8000/state/<state_abbr>
+
 http://localhost:8000/total_deaths
+
 http://localhost:8000/total_deaths/<year>
+ 
 http://localhost:8000/data/<cause_str>  
  
 ### Step 4 : Render visualizations on the app/dashboard
