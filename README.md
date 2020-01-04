@@ -52,6 +52,7 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 ### Step 4 : Render visualizations on the app/dashboard
 
 -The app/dashboard has two dropdown menus that control the visualizations based on year and cause. The visualizations are (insert images of each)
+![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/donut.png)
 
 1. An interactive donut plot created using chart.js that shows percentage of death rate across US due to each cause.
 2. A line/scatter plot created using D3.js that shows death trends over the years(2010-2017) for each of the leading cause.
