@@ -10,8 +10,6 @@
 * Harmeet Kaur
 * Emi Babu 
 
- (add the heroku link here, if we deploy)
-
 ## Summary
 
 This is an internactive Web Dashboard of US death rates and death causes (per 100,000 in population) for every state in the United States for 8 years (2010-2017) based on data from the Center for Disease Control (CDC), supplemented with data for state coordinates and state codes.
@@ -38,14 +36,14 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 
 ### Step 1 : Extract Data (Modules: json, requests, pandas)
 
- Datasets were extracted from CDC API endpoints in the json format by applying filtering and paging criteria from  "https://data.cdc.gov/resource/bi63-dtpu.json$where=year>=2010&$limit=4600" to fetch records from 2010 through 2017. Coordinates for all 50 states were scrapped from "https://www.latlong.net/category/states-236-14.html" and state codes were downloaded as csv from "https://worldpopulationreview.com/states/state-abbreviations" in jupyter notebook.
+ Datasets were extracted from CDC API endpoints in the json format by applying filtering and paging criteria from  "https://data.cdc.gov/resource/bi63-dtpu.json$where=year>=2010&$limit=4600" to fetch records from 2010 through 2017. Coordinates for all 50 states were scrapped from "https://www.latlong.net/category/states-236-14.html".
 
 
 ### Step 2 : Data wrangling and Databasing (Modules: pandas, pymongo, os, MongoDB Compass)
 
- -Datasets were loaded as pandas dataframe. Column ('_113_cause_name', 'Abbr')) irrelevant to the project were dropped. Data cleaning (split, rename, drop) was performed to merge the two dataframes using a common key ('state'). The coordinates for DC was missing in the scrapped dataset. Hence, it was manually incorporated into the master data. State codes were incorporated as a separate table.
+ -Datasets were loaded as pandas dataframe. Column ('_113_cause_name')) irrelevant to the project were dropped. Data cleaning (split, rename, drop) was performed to merge the two dataframes using a common key ('state'). The coordinates for DC was missing in the scrapped dataset. Hence, it was manually incorporated into the master data.
  
- -The final dataset was deployed onto non-relational “NoSQL” database, MongoDB. An account was set up in MongoDB cluster that could be accessed/connected through commandline or using GUI enabled MongoDB Compass.  MongoClient was used to communicate with MongoDB using pymongo. Documents were loaded as dictionaries as NoSQL database provides support for JSON-styled, document-oriented storage systems. The database is available as "complete_death_coord_data" with two collections named "mortality_records" and "state_codes".
+ -The final dataset was deployed onto non-relational “NoSQL” database, MongoDB. An account was set up in MongoDB cluster that could be accessed/connected through commandline or using GUI enabled MongoDB Compass.  MongoClient was used to communicate with MongoDB using pymongo. Documents were loaded as dictionaries as NoSQL database provides support for JSON-styled, document-oriented storage systems. The database is available as "complete_death_coord_data" with one collection named "mortality_records".
  
  ### Step 3: Design Flask API 
  -Data from database were pulled in to create an API with multiple (specify number) routes using Flask `jsonify` to convert data into a valid JSON response object. Data returned from routes were used in building interactive visualizations using javascript libraries.
@@ -84,7 +82,7 @@ state boundaries on the map.
  
  
 ### Challenges
-1. Tried depicting line charts to show trends with different units of measurement in one graph
+1. Connecting the scatter plot for each cause using a line to show trends with different units of measurement in one graph.
 2. Map: Getting the properties within choropleth, passing an array within locations and z:co-ordinates
 3. Connecting the plots together with the dropdown
 
@@ -93,7 +91,7 @@ state boundaries on the map.
 
 1) Heart disease and cancer are by far the two highest causes of death in the United States in comparison to the other eight top causes of death. CLRD, stroke, and unintentional injuries have also consistently been in the top five causes of death, yet each of these accounts for lessthan a third of the deaths caused by heart disease (the leading cause of death) each year.
 
-2) 7 have an upward trend wheras 2 show a downward trend.(Emi explain line)
+2) Seven of the ten causes have generally trended upwards since 2010 in terms of total deaths. The three causes that don't show this trend are stroke, heart disease, and influenza and pneumonia. But Cancer and Heart disease are the causes which have the most number of deaths in the United States.
 
 3) There is obviously a high correlation with population size and the amount of deaths in a state, which explains why California and Texas are always the most darkly shaded for total deaths from Heart Disease(which is the one of the top cause), Influenza and Pneumonia. CA and TX are mostly darkly shaded, but they also have more population, hence more deaths. This is interpreted by the fact that 43% of US adults refuse to get the flu vaccinations within these states. Alzeihmers, Dementia, Mild CongnitiveImpairment seems low in Montana and Idaho compared to other states overall. 
 
@@ -102,7 +100,6 @@ To run:
 * Include a Mapbox token within Config.js
 * Ensure all libraries are installed per requirements.txt
 * Run python app.py
-*
 
 
 
