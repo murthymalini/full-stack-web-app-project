@@ -53,7 +53,8 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 -The app/dashboard has two dropdown menus that control the visualizations based on year and cause. The visualizations are (insert images of each)
 1. An interactive donut plot created using chart.js that shows percentage of death rate across US due to each cause.
 2. A line/scatter plot created using D3.js that shows death trends over the years(2010-2017) for each of the leading cause.
-3. An interactive chloropleth map showing death rates for each state. Differential color intensity reflects number of deaths. 
+3. An interactive chloropleth map showing death rates for each state. Differential color intensity reflects number of deaths. Source for   geojson state polygon geometry info comes from file from this website: https://leafletjs.com/examples/choropleth/us-states.js
+state boundaries on the map.
 
  - HMTL & CSS files
    - index.html : Used to set up the webpage where data will be rendered that create vizualisations
@@ -63,17 +64,14 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
    - logic.js : Primary javascript files that sets up map and connects functions
    - heatmap.js :
    - config.js :
-   - 
-   -
- 
+   
  ### Javascript packages used:
  * Mapbox
  * Leaflet
  * D3
  * Chart
  
-
-
+ 
 ### Challenges
 1. Line plot: Emi add here
 2. Map: Mary add here
@@ -81,8 +79,13 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 
 
 
-### Conclusions
-conclusions from interpretations here
+### Findings of the project
+
+1) Heart disease and cancer are by far the two highest causes of death in the United States in comparison to the other eight top causes of death. CLRD, stroke, and unintentional injuries have also consistently been in the top five causes of death, yet each of these accounts for lessthan a third of the deaths caused by heart disease (the leading cause of death) each year.
+
+2) 7 have an upward trend wheras 2 show a downward trend.(Emi explain line)
+
+3) There is obviously a high correlation with population size and the amount of deaths in a state, which explains why California and Texas are always the most darkly shaded for total deaths from Heart Disease(which is the one of the top cause), Influenza and Pneumonia. CA and TX are mostly darkly shaded, but they also have more population, hence more deaths. This is interpreted by the fact that 43% of US adults refuse to get the flu vaccinations within these states. Alzeihmers, Dementia, Mild CongnitiveImpairment seems low in Montana and Idaho compared to other states overall. 
 
 To run: Include a Mapbox token 
 
