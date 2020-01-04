@@ -47,27 +47,18 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
  -Data from database were pulled in to create an API with multiple (specify number) routes using Flask `jsonify` to convert data into a valid JSON response object. Data returned from routes were used in building interactive visualizations using javascript libraries.
  
  ### App Routes
-http://localhost:8000/causes
-
-http://localhost:8000/years
-
-http://localhost:8000/data
-
-http://localhost:8000/data/<year>/<cause_str>
- 
-http://localhost:8000/alldata
-
-http://localhost:8000/year/<year>
- 
-http://localhost:8000/state
-
-http://localhost:8000/state/<state_abbr>
-
-http://localhost:8000/total_deaths
-
-http://localhost:8000/total_deaths/<year>
- 
 http://localhost:8000/data/<cause_str> 
+http://localhost:8000/causes - list of distinct causes (the top 10 and “All causes”) from our data, used for dropdown menu
+http://localhost:8000/years - list of distinct years (2010-2017), used for dropdown menu
+http://localhost:8000/total_deaths – all data, summarized, aggregated by year and cause, this was used for the scatter plot
+http://localhost:8000/total_deaths/<year> - summarized data for year = <year>, aggregated by year and cause, this was used for donut chart
+http://localhost:8000/data - all data for year = 2017 and “cause_name” = “All causes”
+http://localhost:8000/data/<year>/<cause_str> - all data for year = <year> and “cause_name” like “<cause_str>%”, this route is used for our map for a given year/cause provided on the dropdown menu.  The substring in the route is avoid having to enter a space (for causes that contain a space).
+http://localhost:8000/alldata – all data, the entire collection
+http://localhost:8000/year/<year> - all data for a year = <year>
+http://localhost:8000/state/<state_abbr>/<year>/<cause_str> - all data for specific state, year and cause
+http://localhost:8000/state/<state_abbr> - all data for specific state (all years and all causes)
+http://localhost:8000/data/<cause_str - summarized data for a specific cause, aggregated by year and cause, this is useful for analyzing summarized data
  
 ### Step 4 : Render visualizations on the app/dashboard
 
