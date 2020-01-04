@@ -97,6 +97,7 @@ To run:
 * Include a Mapbox token within Config.js
 * Ensure all libraries are installed per requirements.txt
 * Run python app.py
+*
 
 
 
