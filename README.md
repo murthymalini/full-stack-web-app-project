@@ -28,8 +28,6 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
 
 * Center for Disease Control and Prevention (https://data.cdc.gov/NCHS/NCHS-Leading-Causes-of-Death-United-States/bi63-dtpu): This dataset presents the age-adjusted death rates for the 10 leading causes of death in the United States beginning in 1999.Total number of records are 10,886. Data are based on information from all resident death certificates filed in the 50 states and the District of Columbia using demographic and medical characteristics. Age-adjusted death rates (per 100,000 population) are based on the 2000 U.S. standard population. 
 * "https://www.latlong.net/category/states-236-14.html": This dataset includes information on coordinates for all 50 states.
-* "http://worldpopulationreview.com/states/state-abbreviations/": This dataset includes state codes.
-
 
 ## Workflow 
 ![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/workflow.png)
@@ -48,7 +46,7 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
  ### Step 3: Design Flask API 
  -Data from database were pulled in to create an API with multiple (specify number) routes using Flask `jsonify` to convert data into a valid JSON response object. Data returned from routes were used in building interactive visualizations using javascript libraries.
  
-### App Routes
+ ### App Routes
 http://localhost:8000/causes
 
 http://localhost:8000/years
@@ -69,7 +67,7 @@ http://localhost:8000/total_deaths
 
 http://localhost:8000/total_deaths/<year>
  
-http://localhost:8000/data/<cause_str>  
+http://localhost:8000/data/<cause_str> 
  
 ### Step 4 : Render visualizations on the app/dashboard
 
@@ -77,12 +75,13 @@ http://localhost:8000/data/<cause_str>
 
 1. An interactive donut plot created using chart.js that shows percentage of death rate across US due to each cause.
 ![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/donut.png)
-2. A line/scatter plot created using D3.js that shows death trends over the years(2010-2017) for each of the leading cause.
+2. A scatter plot created using D3.js that shows death trends over the years(2010-2017) for each of the leading cause.
 ![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/scatter.png)
 3. An interactive chloropleth map showing death rates for each state. Differential color intensity reflects number of deaths. Source for   geojson state polygon geometry info comes from file from this website: https://leafletjs.com/examples/choropleth/us-states.js
 state boundaries on the map.
 ![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/map.png)
 
+### Files used
  - HMTL & CSS files
    - index.html : Used to set up the webpage where data will be rendered that create vizualisations
    - style.css : Used to style the webpage
@@ -103,9 +102,7 @@ state boundaries on the map.
  * D3
  * Chart.js
  
-
-  
-  
+ 
 ### Challenges Faced 
 1. Connecting the scatter plot for each cause using a line to show trends with different units of measurement in one graph.
 2. Map: Getting the properties within choropleth, passing an array within locations and z:co-ordinates : Resolved
