@@ -13,6 +13,7 @@ app = Flask(__name__)
 mapkey = os.environ.get('MAPKEY', '')
 
 # Use flask_pymongo to set up mongo connection
+# Use flask_pymongo to set up mongo connection
 # app.config["MONGO_URI"] = "mongodb://localhost:27017/craigslist_app"
 app.config["MONGO_URI"] = "mongodb+srv://Harmeet:harmeet123@cluster0-v6uxh.mongodb.net/complete_death_coord_data"
 mongo = PyMongo(app)
