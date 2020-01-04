@@ -50,6 +50,7 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
  -Data from database were pulled in to create an API with multiple (specify number) routes using Flask `jsonify` to convert data into a valid JSON response object. Data returned from routes were used in building interactive visualizations using javascript libraries.
  
 ### Step 4 : Render visualizations on the app/dashboard
+
 -The app/dashboard has two dropdown menus that control the visualizations based on year and cause. The visualizations are (insert images of each)
 1. An interactive donut plot created using chart.js that shows percentage of death rate across US due to each cause.
 2. A line/scatter plot created using D3.js that shows death trends over the years(2010-2017) for each of the leading cause.
@@ -61,22 +62,26 @@ state boundaries on the map.
    - style.css : Used to style the webpage
  
  - Javascript Files 
-   - logic.js : Primary javascript files that sets up map and connects functions
-   - heatmap.js :
-   - config.js :
+   - dashboard.js : controls the dashboard look, menu dropdown
+   - deathRate.js : update geojson properties for total deaths and aadr
+   - donutChart.js : create the donut chart
+   - globalVariables.js : dropdown menu variables re-used across multiple js files
+   - mapColors.js : choropleth map
+   - scatter.js : creates the scatter plot to show trends across all causes
+   - us-states.js : refers to US states with latitude and longitude geo co-ordinates
+   - TO ADD A Config.js
    
  ### Javascript packages used:
  * Mapbox
  * Leaflet
  * D3
- * Chart
+ * Chart.js
  
  
 ### Challenges
-1. Line plot: Emi add here
-2. Map: Mary add here
+1. Tried depicting line charts to show trends with different units of measurement in one graph
+2. Map: Getting the properties within choropleth, passing an array within locations and z:co-ordinates
 3. Connecting the plots together with the dropdown
-
 
 
 ### Findings of the project
@@ -87,7 +92,12 @@ state boundaries on the map.
 
 3) There is obviously a high correlation with population size and the amount of deaths in a state, which explains why California and Texas are always the most darkly shaded for total deaths from Heart Disease(which is the one of the top cause), Influenza and Pneumonia. CA and TX are mostly darkly shaded, but they also have more population, hence more deaths. This is interpreted by the fact that 43% of US adults refuse to get the flu vaccinations within these states. Alzeihmers, Dementia, Mild CongnitiveImpairment seems low in Montana and Idaho compared to other states overall. 
 
-To run: Include a Mapbox token 
+To run: 
+
+* Include a Mapbox token within Config.js
+* Ensure all libraries are installed per requirements.txt
+* Run python app.py
+
 
 
 
