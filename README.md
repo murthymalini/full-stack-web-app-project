@@ -96,7 +96,7 @@ state boundaries on the map.
 
 3) There is obviously a high correlation with population size and the amount of deaths in a state, which explains why California and Texas are always the most darkly shaded for total deaths from Heart Disease(which is the one of the top cause), Influenza and Pneumonia. CA and TX are mostly darkly shaded, but they also have more population, hence more deaths. This is interpreted by the fact that 43% of US adults refuse to get the flu vaccinations within these states. Alzeihmers, Dementia, Mild CongnitiveImpairment seems low in Montana and Idaho compared to other states overall. 
 
-To run: 
+### To run: 
 
 1. Run: pip install -r requirements.txt to install necessary modules in environment.
 2. An API key for MapBox is required. These can be obtained at https://docs.mapbox.com/help/glossary/access-token/. After obtaining a key, copy that key into the config.js file.
