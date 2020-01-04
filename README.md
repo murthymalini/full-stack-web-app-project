@@ -51,13 +51,15 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
  
 ### Step 4 : Render visualizations on the app/dashboard
 
--The app/dashboard has two dropdown menus that control the visualizations based on year and cause. The visualizations are (insert images of each)
-![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/donut.png)
+-The app/dashboard has two dropdown menus that control the visualizations based on year and cause. The visualizations are: 
 
 1. An interactive donut plot created using chart.js that shows percentage of death rate across US due to each cause.
+![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/donut.png)
 2. A line/scatter plot created using D3.js that shows death trends over the years(2010-2017) for each of the leading cause.
+![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/scatter.png)
 3. An interactive chloropleth map showing death rates for each state. Differential color intensity reflects number of deaths. Source for   geojson state polygon geometry info comes from file from this website: https://leafletjs.com/examples/choropleth/us-states.js
 state boundaries on the map.
+![Alt text](https://github.com/Harmeet2504/full-stack-web-app-project/blob/master/images/map.png)
 
  - HMTL & CSS files
    - index.html : Used to set up the webpage where data will be rendered that create vizualisations
