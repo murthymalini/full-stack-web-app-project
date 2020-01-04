@@ -46,6 +46,29 @@ This is an internactive Web Dashboard of US death rates and death causes (per 10
  ### Step 3: Design Flask API 
  -Data from database were pulled in to create an API with multiple (specify number) routes using Flask `jsonify` to convert data into a valid JSON response object. Data returned from routes were used in building interactive visualizations using javascript libraries.
  
+ ### App Routes
+http://localhost:8000/causes
+
+http://localhost:8000/years
+
+http://localhost:8000/data
+
+http://localhost:8000/data/<year>/<cause_str>
+ 
+http://localhost:8000/alldata
+
+http://localhost:8000/year/<year>
+ 
+http://localhost:8000/state
+
+http://localhost:8000/state/<state_abbr>
+
+http://localhost:8000/total_deaths
+
+http://localhost:8000/total_deaths/<year>
+ 
+http://localhost:8000/data/<cause_str> 
+ 
 ### Step 4 : Render visualizations on the app/dashboard
 
 -The app/dashboard has two dropdown menus that control the visualizations based on year and cause. The visualizations are: 
