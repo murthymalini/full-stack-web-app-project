@@ -10,7 +10,7 @@
 * Harmeet Kaur
 * Emi Babu 
 
-## Deployed on Heruko http://livebetter.herokuapp.com/
+## Deployed on Heroku http://livebetter.herokuapp.com/
 
 ## Summary
 
